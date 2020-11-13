@@ -21,7 +21,7 @@ public class MenuPrincipal extends JFrame
                 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(800, 600);
-        this.setJMenuBar(createMenu());
+        this.setJMenuBar(createMenu()); //Para mostrar el menu bar por que antes no mostraba nada
     }
 
     public void mostrar()
@@ -37,6 +37,7 @@ public class MenuPrincipal extends JFrame
         JMenu menuTarjetas = new JMenu("Tarjetas");
         JMenu menuTransferencias = new JMenu("Transferencias");
 
+// -------------------------------- Agregar crear y Listar a la cuenta ---------------------------------------
         JMenuItem crearCuenta = new JMenuItem("Crear");
         crearCuenta.addActionListener(new ActionListener() {
                 @Override
@@ -55,10 +56,14 @@ public class MenuPrincipal extends JFrame
                 }
         });
         menuCuentas.add(listarCuentas);
+//------------------------------------------------------------------------------------------------------------
 
+//-----------------------Le indico al menuBar que me agregue las opciones de cuentas, tarjetas y trf --------------//
         menuBar.add(menuCuentas);
+        menuBar.add(menuTarjetas); // todavía no está activa
+        menuBar.add(menuTransferencias); // todavía no está activa
 
-        return menuBar;
+        return menuBar; //devolveme el menuBar al que le acabo de agregar las opciones
     }
 
 }

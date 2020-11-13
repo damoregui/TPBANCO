@@ -24,6 +24,7 @@ public class ModeloCuentas extends AbstractTableModel
         return 4;
     }
 
+    // valores del listar
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Cuenta cuenta = cuentas.get(rowIndex);

@@ -1,4 +1,5 @@
 package edu.up.ui.ControlesVisuales;
+import edu.up.Excepciones.ExcepcionConexionDB;
 
 public class ControlInteger extends ControlBase
 {

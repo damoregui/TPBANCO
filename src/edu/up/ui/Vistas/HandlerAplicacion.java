@@ -121,7 +121,7 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject
 
     public void alta( Cuenta cuenta )
     {
-        Mensajeria.getInstancia().MostrarInformacion( "Se ha creado la cuenta" + cuenta );
+        Mensajeria.getInstancia().MostrarInformacion( "Se ha creado la cuenta" );
         this.activarPanelListarCuenta( null );
     }
 

@@ -13,7 +13,7 @@ public interface CuentaDAO {
     List<Cuenta> list() throws ExcepcionCuenta;
     
     void agregarObservador( IObservadorDeDao observador );
-    void notificarBaja( String codigo );
-    void notificarAlta( Cuenta cuenta );
-    void notificarModificacion( Cuenta cuenta );
+    void notificarBaja( String codigo ) throws ExcepcionCuenta;
+    void notificarAlta( Cuenta cuenta ) throws ExcepcionCuenta;
+    void notificarModificacion( Cuenta cuenta ) throws ExcepcionCuenta;
 }
