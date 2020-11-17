@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.sql.rowset.CachedRowSet;
+import java.sql.DriverManager;
 
 public class ConexionDB
 {    

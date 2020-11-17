@@ -17,7 +17,7 @@ public abstract class Form extends JPanel
         this.add( new JLabel( this.obtenerTitulo() ) );
         this.dibujarFormulario();
     }
- 
+
     protected abstract String obtenerTitulo();
     protected abstract void dibujarFormulario();
 }

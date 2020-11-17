@@ -26,6 +26,7 @@ public class Logueos
     {
         StringWriter sw = new StringWriter();
         ex.printStackTrace(new PrintWriter(sw));
+        ex.printStackTrace();
         String exceptionAsString = sw.toString();
         loguear( "------------------------------------------------" );
         loguear( ex.getMessage() );

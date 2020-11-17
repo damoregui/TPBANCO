@@ -22,7 +22,7 @@ public class CuentaBO extends BussinessObjectObservable implements IObservadorDe
         this.cuentaDao = dao;
         this.cuentaDao.agregarObservador( this );
     }
-    
+
     public void grabar( Cuenta cuenta ) throws ExcepcionCuenta
     {
         if ( cuenta.getCodigo().equals("") )

@@ -42,7 +42,7 @@ public class CuentaFormListar extends Form
 
     @Override
     protected void dibujarFormulario()
-    {        
+    {
         this.cuentas = this.handler.listarCuentas();
         JTable grilla = new JTable( new ModeloCuentas( this.cuentas ) );
 

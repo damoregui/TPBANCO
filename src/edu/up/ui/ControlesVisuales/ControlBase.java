@@ -29,6 +29,7 @@ public abstract class ControlBase extends JPanel
         this.textfield = new JTextField();
         textfield.setMaximumSize(dimension);
         textfield.setMinimumSize(dimension);
+
         
         JSplitPane pane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, label, textfield);
         pane.setMaximumSize( new Dimension(600, 25) );

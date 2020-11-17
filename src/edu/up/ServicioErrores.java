@@ -22,9 +22,13 @@ public class ServicioErrores
     
     public void informarError( Exception ex )
     {
-        List<String> mensajes = this.obtenerInformacion( ex );
-        
-        Mensajeria.getInstancia().MostrarError( String.join("\r\n", mensajes ) );
+        Mensajeria.getInstancia().mostrarError(ex.getMessage() );
+        Logueos.loguearExcepcion( ex );
+    }
+
+    public void informarError( Exception ex, String mensajeError )
+    {
+        Mensajeria.getInstancia().mostrarError(mensajeError + ex.getMessage()  );
         Logueos.loguearExcepcion( ex );
     }
  
