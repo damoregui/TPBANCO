@@ -8,8 +8,7 @@ public class Cuenta {
     private String tipoCuenta;
     private float saldo;
 
-    public Cuenta(String codigo, int dni, String nombre, String tipoCuenta, float saldo)
-    {
+    public Cuenta(String codigo, int dni, String nombre, String tipoCuenta, float saldo) {
         this.codigo = codigo;
         this.dni = dni;
         this.nombre = nombre;
@@ -17,13 +16,11 @@ public class Cuenta {
         this.saldo = saldo;
     }
 
-    public String getCodigo()
-    {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo( String codigo )
-    {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -59,6 +56,7 @@ public class Cuenta {
         this.saldo = saldo;
     }
 }
+
 
 
 

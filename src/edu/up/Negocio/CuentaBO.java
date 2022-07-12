@@ -7,7 +7,7 @@ import edu.up.dao.IObservadorDeDao;
 import edu.up.dao.impl.CuentaDAOImpl;
 import java.util.List;
 
-public class CuentaBO extends BussinessObjectObservable implements IObservadorDeDao
+public class CuentaBO extends BussinessObjectObservable implements IObservadorDeDao // el implents hace referencia a interfaz. IObservadorDeDao define solamente comportamiento . Me define los mètodos que tiene que tener cualqueir clse que quiera ser observadora de un dao
 {
     private final CuentaDAO cuentaDao;
 
@@ -45,6 +45,8 @@ public class CuentaBO extends BussinessObjectObservable implements IObservadorDe
         return cuentaDao.list();
     }
 
+
+
     @Override
     public void altaEnDao( Cuenta cuenta )
     {
@@ -61,5 +63,16 @@ public class CuentaBO extends BussinessObjectObservable implements IObservadorDe
     public void modificacionEnDao( Cuenta cuenta )
     {
         this.notificarModificacion( cuenta );
+    }
+
+    public void transferirMonto (Cuenta cuentaOrigen, Cuenta cuentaDestino, float monto) throws ExcepcionCuenta {
+        if (cuentaOrigen.getSaldo() >= monto) {
+            cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - monto);
+            cuentaDestino.setSaldo(cuentaDestino.getSaldo() + monto);
+            cuentaDao.update(cuentaOrigen);
+            cuentaDao.update(cuentaDestino);
+        } else {
+            //Mostrar mensaje de error por monto
+        }
     }
 }

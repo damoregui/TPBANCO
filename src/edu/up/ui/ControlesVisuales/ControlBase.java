@@ -7,21 +7,19 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
-public abstract class ControlBase extends JPanel
-{
+public abstract class ControlBase extends JPanel {
     protected JTextField textfield;
 
-    public ControlBase( String etiqueta )
-    {
+    public ControlBase(String etiqueta) {
         Dimension dimension = new Dimension(200, 25);
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setAlignmentX(LEFT_ALIGNMENT);
         this.setAlignmentY(TOP_ALIGNMENT);
-        
+
         //this.setBorder( LineBorder.createBlackLineBorder() );
-        
-        JLabel label = new JLabel( etiqueta );
+
+        JLabel label = new JLabel(etiqueta);
         label.setAlignmentX(LEFT_ALIGNMENT);
         label.setMinimumSize(dimension);
         //this.add(label);
@@ -30,10 +28,10 @@ public abstract class ControlBase extends JPanel
         textfield.setMaximumSize(dimension);
         textfield.setMinimumSize(dimension);
 
-        
+
         JSplitPane pane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, label, textfield);
-        pane.setMaximumSize( new Dimension(600, 25) );
-        
+        pane.setMaximumSize(new Dimension(600, 25));
+
         this.add(pane);
-    }    
+    }
 }

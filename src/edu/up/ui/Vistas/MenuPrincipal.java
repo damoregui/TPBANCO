@@ -56,13 +56,42 @@ public class MenuPrincipal extends JFrame
                 }
         });
         menuCuentas.add(listarCuentas);
+
+        JMenuItem transferirEntreCuentas = new JMenuItem("Transferir");
+        transferirEntreCuentas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handler.activarPanelListarCuenta( e );
+            }
+        });
+        menuCuentas.add(transferirEntreCuentas);
+
+// -------------------------------- Agregar crear y Listar Tarjetas ---------------------------------------
+
+        JMenuItem crearTarjeta = new JMenuItem("Crear");
+        crearTarjeta.addActionListener(new ActionListener() {
+                                          @Override
+                                          public void actionPerformed(ActionEvent e) {
+                                              handler.activarPanelCrearTarjeta( e );
+                                          }
+                                      }
+        );
+        menuTarjetas.add(crearTarjeta);
+
+        JMenuItem listarTarjeta = new JMenuItem("Listar");
+        listarTarjeta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handler.activarPanelListarCuenta( e );
+            }
+        });
+        menuTarjetas.add(listarTarjeta);
+
 //------------------------------------------------------------------------------------------------------------
 
 //-----------------------Le indico al menuBar que me agregue las opciones de cuentas, tarjetas y trf --------------//
         menuBar.add(menuCuentas);
         menuBar.add(menuTarjetas); // todavía no está activa
-        menuBar.add(menuTransferencias); // todavía no está activa
-
         return menuBar; //devolveme el menuBar al que le acabo de agregar las opciones
     }
 

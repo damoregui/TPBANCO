@@ -1,19 +1,17 @@
 package edu.up.Entidades;
 
-
-// Se usará para la entrega final //
-
-
 public class Tarjeta {
+
+
+    private String codigoTarjeta;
     private int dniPropietario;
-    private String marca;
-    private String limite;
-    private int saldoTarjeta;
+    private float limite;
+    private float saldoTarjeta;
 
 
-    public Tarjeta(int dniPropietario, String marca, String limite, int saldoTarjeta) {
+    public Tarjeta(int dniPropietario, float limite, float saldoTarjeta) {
+        this.codigoTarjeta = codigoTarjeta;
         this.dniPropietario = dniPropietario;
-        this.marca = marca;
         this.limite = limite;
         this.saldoTarjeta = saldoTarjeta;
 
@@ -22,31 +20,21 @@ public class Tarjeta {
     public int getDniPropietario() {
         return dniPropietario;
     }
-
     public void setDniPropietario(int dniPropietario) {
         this.dniPropietario = dniPropietario;
     }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public String getLimite() {
+    public float getLimite() {
         return limite;
     }
-
-    public void setLimite(String limite) {
+    public void setLimite(float limite) {
         this.limite = limite;
     }
-    public int getSaldoTarjeta() {
+    public float getSaldoTarjeta() {
         return saldoTarjeta;
     }
-
-    public void setSaldoTarjeta(int saldo) {
+    public void setSaldoTarjeta(float saldoTarjeta) {
         this.saldoTarjeta = saldoTarjeta;
     }
+    public String getCodigoTarjeta() {return codigoTarjeta;}
+    public void setCodigoTarjeta(String codigo) {this.codigoTarjeta = codigoTarjeta;}
 }

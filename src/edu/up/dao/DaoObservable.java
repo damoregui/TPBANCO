@@ -1,44 +1,39 @@
 package edu.up.dao;
 
 import edu.up.Entidades.Cuenta;
+import edu.up.Entidades.Tarjeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DaoObservable
+public class DaoObservable // Clase
 {
-    protected List<IObservadorDeDao> observadores ;
+    protected List<IObservadorDeDao> observadores;
 
-    public DaoObservable() 
+    public DaoObservable() // Constructor
     {
-        this.observadores = new ArrayList<IObservadorDeDao>();
-    }
-      
-    public void agregarObservador( IObservadorDeDao observador )
-    {
-        this.observadores.add( observador );
+        this.observadores = new ArrayList<IObservadorDeDao>(); // inicializa con una lista vacia y puede contener tipos de datos IbservadorDeDao
     }
 
-    public void notificarBaja( String codigo )
+    public void agregarObservador(IObservadorDeDao observador) //Recibe el tipo de dato IobservadorDeDao y lo agrega a la lista // Mi bussiness object es cuenta
     {
-        for (IObservadorDeDao object : this.observadores )
-        {
-            object.bajaEnDao( codigo );
+        this.observadores.add(observador);
+    }
+
+    public void notificarBaja(String codigo) {
+        for (IObservadorDeDao object : this.observadores) {
+            object.bajaEnDao(codigo);
         }
     }
 
-    public void notificarAlta( Cuenta cuenta )
-    {
-        for (IObservadorDeDao object : this.observadores )
-        {
-            object.altaEnDao( cuenta );
+    public void notificarAlta(Cuenta cuenta) {
+        for (IObservadorDeDao object : this.observadores) {
+            object.altaEnDao(cuenta);
         }
     }
 
-    public void notificarModificacion( Cuenta cuenta )
-    {
-        for (IObservadorDeDao object : this.observadores )
-        {
-            object.modificacionEnDao( cuenta );
+    public void notificarModificacion(Cuenta cuenta) {
+        for (IObservadorDeDao object : this.observadores) {
+            object.modificacionEnDao(cuenta);
         }
     }
 }

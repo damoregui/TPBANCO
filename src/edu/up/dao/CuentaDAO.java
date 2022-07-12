@@ -2,7 +2,6 @@ package edu.up.dao;
 
 import edu.up.Entidades.Cuenta;
 import edu.up.Excepciones.ExcepcionCuenta;
-
 import java.util.List;
 
 public interface CuentaDAO {

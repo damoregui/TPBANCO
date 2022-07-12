@@ -3,40 +3,29 @@ package edu.up.Entidades;
 // Se usará para la entrega final //
 
 public class Transferencia {
-    private int cuentaOrigen;
-    private int cuentaDestino;
+    private Cuenta cuentaOrigen;
+    private Cuenta cuentaDestino;
+    private float monto;
     private String motivoTransferencia;
 
-    public Transferencia (int cuentaOrigen, int cuentaDestino, String motivoTransferencia){
+    public Transferencia (Cuenta cuentaOrigen, Cuenta cuentaDestino, String motivoTransferencia){
         this.cuentaOrigen = cuentaOrigen;
         this.cuentaDestino = cuentaDestino;
         this.motivoTransferencia = motivoTransferencia;
 
     }
-
-    public int getCuentaOrigen() {
+    public Cuenta getCuentaOrigen() {
         return cuentaOrigen;
     }
 
-    public void setCuentaOrigen(int cuentaOrigen) {
-        this.cuentaOrigen = cuentaOrigen;
-    }
-
-    public int getCuentaDestino() {
+    public Cuenta getCuentaDestino() {
         return cuentaDestino;
-    }
-
-    public void setCuentaDestino(int cuentaDestino) {
-        this.cuentaDestino = cuentaDestino;
     }
 
     public String getMotivoTransferencia() {
         return motivoTransferencia;
     }
 
-    public void setMotivoTransferencia(String motivoTransferencia) {
-        this.motivoTransferencia = motivoTransferencia;
-    }
-
+    // no tiene sentido tener seters porque no voy a cambiarle
 
 }

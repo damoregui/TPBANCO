@@ -14,6 +14,7 @@ public final class Configuracion
         public String DB_DRIVER = "org.h2.Driver";
         public String DB_URL = "jdbc:h2:~/test";
         public String DB_USERNAME = "sa";
+
         public String DB_PASSWORD = "";
    
    

@@ -1,5 +1,4 @@
 package edu.up.dao.impl;
-
 import edu.up.dao.CuentaDAO;
 import edu.up.Entidades.Cuenta;
 import edu.up.Excepciones.ExcepcionConexionDB;
@@ -12,12 +11,6 @@ import java.util.List;
 
 public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
 {
-//    @Override
-//    public Cuenta obtener( int clave )
-//    {
-//        return new Cuenta( 1, "", "", 5 );
-//    }
-    
     @Override
     public void insert(Cuenta cuenta) throws ExcepcionCuenta
     {
@@ -25,7 +18,7 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
 
         String sql = "INSERT INTO cuentas (codigo, dni, nombre, tipocuenta, saldo) "
                 + "VALUES ("
-                + "'" + codigo + "', " 
+                + "'" + codigo + "', "
                 + cuenta.getDni()+ ", "
                 + "'" + cuenta.getNombre() + "', "
                 + "'" + cuenta.getTipoCuenta()  +  "',"
@@ -106,5 +99,73 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
         }
 
         return results;
+    }
+
+    // AGREGAR ACA LAS TRANSFERENCIAS ENTRE CUENTAS
+
+    // CONSULTAR ES EXECUTE QUERY Y PARA EDITARBORRARAGREGAR ES EXECUTEUPDATE
+
+    public List<Cuenta> list(int dni) throws ExcepcionCuenta
+    {
+        List<Cuenta> results = new LinkedList<>();
+        try
+        {
+            String sql = "SELECT * FROM cuentas WHERE dni = " + dni ; // esto se llama autoboxing, lo sumo para hacer una query con un integer
+
+            ResultSet rs = ConexionDB.getInstancia().ObtenerResultSet( sql );
+
+            while ( ConexionDB.getInstancia().avanzarResultSet( rs ) )
+            {
+                results.add(new Cuenta(
+                        ConexionDB.getInstancia().obtenerValorResultSetString(rs, "codigo" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetInt(rs, "dni" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetString(rs, "nombre" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetString(rs, "tipocuenta" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldo")));
+            }
+        }
+        catch ( ExcepcionConexionDB ex )
+        {
+            throw new ExcepcionCuenta( "Error al obtener listado de Cuentas", ex );
+        }
+
+        return results;
+    }
+
+    public Cuenta get(String codigo) throws ExcepcionCuenta
+    {
+        List<Cuenta> results = new LinkedList<>();
+
+        Cuenta result = null;
+        try
+        {
+            String sql = "SELECT * FROM cuentas WHERE codigo = '" + codigo + "'" ; // esto se llama autoboxing, lo sumo para hacer una query con un integer
+
+
+            ResultSet rs = ConexionDB.getInstancia().ObtenerResultSet( sql );
+
+            while ( ConexionDB.getInstancia().avanzarResultSet( rs ) )
+            {
+                results.add(new Cuenta(
+                        ConexionDB.getInstancia().obtenerValorResultSetString(rs, "codigo" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetInt(rs, "dni" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetString(rs, "nombre" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetString(rs, "tipocuenta" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldo")));
+            }
+
+
+        }
+        catch ( IndexOutOfBoundsException ex ){
+            throw new ExcepcionCuenta("La cuenta seleccionada no existe", ex);
+        }
+        catch ( ExcepcionConexionDB ex )
+        {
+            throw new ExcepcionCuenta( "Error al obtener listado de Cuentas", ex );
+        }
+
+        //obtener el primer elemento de results (si existe) y asignárselo a result para que el return de abajo lo devuelva
+        result = results.get(0) ;
+        return result;
     }
 }

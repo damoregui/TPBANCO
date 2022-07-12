@@ -9,7 +9,10 @@ public class TableManager {
     public static void createtable() throws ExcepcionConexionDB
     {
         String sql = "CREATE TABLE IF NOT EXISTS cuentas ( codigo VARCHAR(40), nombre VARCHAR(256), dni INTEGER, tipocuenta VARCHAR(2), saldo DECIMAL( 15,4) )";
+        String sql2 = "CREATE TABLE IF NOT EXISTS tarjetas ( codigoTarjeta VARCHAR(40), dnipropietario INTEGER, limite DECIMAL( 15,4), saldotarjeta DECIMAL (15,4) )";
         ConexionDB.getInstancia().executeSQL( sql );
+        ConexionDB.getInstancia().executeSQL( sql2 );
+
     }
 	
     public static void droptable() throws ExcepcionConexionDB

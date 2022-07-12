@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServicioErrores
-{
+{  
     private static ServicioErrores instancia = null;
     
     private ServicioErrores()
