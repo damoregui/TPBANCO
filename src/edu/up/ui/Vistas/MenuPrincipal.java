@@ -82,7 +82,7 @@ public class MenuPrincipal extends JFrame
         listarTarjeta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handler.activarPanelListarCuenta( e );
+                handler.activarPanelListarTarjeta( e );
             }
         });
         menuTarjetas.add(listarTarjeta);
