@@ -24,25 +24,28 @@ public class CuentaFormABM extends Form
     private ControlInteger controlDni;
     private ControlFloat controlSaldo;
     private ControlTexto controlTipoCta;
+    private ControlFloat controlDebito;
+    private ControlFloat controlCredito;
 
     public ControlTexto getControlNombre()
     {
         return controlNombre;
     }
-
     public ControlInteger getControlDni()
     {
         return controlDni;
     }
-
     public ControlFloat getControlSaldo()
     {
         return controlSaldo;
     }
-
-    public ControlTexto getControlTipoCta()
+    public ControlFloat getControlCredito()
     {
-        return controlTipoCta;
+        return controlCredito;
+    }
+    public ControlFloat getControlDebito()
+    {
+        return controlDebito;
     }
 
     private Cuenta entidad;
@@ -61,6 +64,8 @@ public class CuentaFormABM extends Form
         this.controlNombre.setValor( this.entidad.getNombre() );
         this.controlTipoCta.setValor( this.entidad.getTipoCuenta() );
         this.controlSaldo.setValor( this.entidad.getSaldo() );
+        this.controlDebito.setValor(this.entidad.getDebito() );
+        this.controlCredito.setValor( this.entidad.getCredito() );
     }
 
     // <editor-fold defaultstate="collapsed" desc="Implementacion de Form">
@@ -85,6 +90,11 @@ public class CuentaFormABM extends Form
         this.controlSaldo = new ControlFloat( "Saldo" );
         this.add( this.controlSaldo );
 
+        this.controlDebito = new ControlFloat( "Debito" );
+        this.add( this.controlDebito );
+
+        this.controlCredito = new ControlFloat( "Saldo" );
+        this.add( this.controlCredito );
         // Agregar botonera
         Container panelbotonera = new JPanel();
 
@@ -154,6 +164,24 @@ public class CuentaFormABM extends Form
                     }
                 } catch (ExcepcionCuenta excepcionCuenta) {
                     ServicioErrores.getInstancia().informarError(excepcionCuenta, "El valor para el saldo es inválido");
+                    return;
+                }
+                try {
+                    entidad.setDebito(controlDebito.getValor());
+                    if (controlDebito.getValor() != 0) {
+                        throw new ExcepcionCuenta("El valor inicial de los débitos, no puede ser distinto de 0 (cero)", null);
+                    }
+                } catch (ExcepcionCuenta excepcionCuenta) {
+                    ServicioErrores.getInstancia().informarError(excepcionCuenta, "El valor para el campo DEBITO es inválido \n");
+                    return;
+                }
+                try {
+                    entidad.setCredito(controlCredito.getValor());
+                    if (controlCredito.getValor() != 0) {
+                        throw new ExcepcionCuenta("El valor inicial de los créditos, no puede ser distinto de 0 (cero)", null);
+                    }
+                } catch (ExcepcionCuenta excepcionCuenta) {
+                    ServicioErrores.getInstancia().informarError(excepcionCuenta, "El valor para el campo CREDITO es inválido");
                     return;
                 }
 

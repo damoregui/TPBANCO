@@ -21,7 +21,7 @@ public class ModeloCuentas extends AbstractTableModel
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 6;
     }
 
     // valores del listar
@@ -37,6 +37,10 @@ public class ModeloCuentas extends AbstractTableModel
                 return cuenta.getTipoCuenta();
             case 3:
                 return cuenta.getSaldo();
+            case 4:
+                return cuenta.getDebito();
+            case 5:
+                return cuenta.getCredito();
         }
         return null;
     }
@@ -53,6 +57,10 @@ public class ModeloCuentas extends AbstractTableModel
                 return "tipo";
             case 3:
                 return "saldo";
+            case 4:
+                return "debito";
+            case 5:
+                return "credito";
         }
         return null;
     }

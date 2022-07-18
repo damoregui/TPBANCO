@@ -43,6 +43,14 @@ public class BussinessObjectObservable
         }
     }
 
+    public void notificarTransferencia( Cuenta cuenta )
+    {
+        for (IObservadorDeBussinessObject object : this.observadores )
+        {
+            object.transferencia( cuenta );
+        }
+    }
+
    public void notificarAltaTarjeta( Tarjeta tarjeta ) {
        for (IObservadorDeBussinessObject object : this.observadores) {
            object.altaTarjeta(tarjeta);

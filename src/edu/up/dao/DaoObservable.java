@@ -1,7 +1,6 @@
 package edu.up.dao;
 
 import edu.up.Entidades.Cuenta;
-import edu.up.Entidades.Tarjeta;
 import java.util.ArrayList;
 import java.util.List;
 

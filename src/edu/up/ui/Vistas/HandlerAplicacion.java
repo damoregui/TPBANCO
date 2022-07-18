@@ -24,6 +24,8 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
     private CuentaFormABM panelABMCuenta;
     private CuentaFormListar panelListarCuenta;
 
+    private CuentaFormTransferir panelTransferirCuenta;
+
     private TarjetaFormABM panelABMTarjeta;
     private TarjetaFormListar panelListarTarjeta;
 
@@ -38,6 +40,7 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
 
         this.panelABMCuenta = this.createCuentaPanel();
         this.panelListarCuenta = this.createListarCuentasPanel();
+        this.panelTransferirCuenta = this.createTransferirCuentasPanel();
 
         this.panelABMTarjeta = this.createTarjetaPanel();
         this.panelListarTarjeta = this.createListarTarjetasPanel();
@@ -51,13 +54,17 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
 
     // <editor-fold defaultstate="collapsed" desc="Manejo de eventos del menu">
     public void activarPanelCrearCuenta(ActionEvent e) {
-        this.panelABMCuenta.setearEntidad(new Cuenta("", 0, "", "", 0));
+        this.panelABMCuenta.setearEntidad(new Cuenta("", 0, "", "", 0, 0, 0));
         this.ActivarPanel(this.panelABMCuenta);
     }
 
     public void activarPanelListarCuenta(ActionEvent e) {
         this.panelListarCuenta.RefrescarDatos();
         this.ActivarPanel(this.panelListarCuenta);
+    }
+    public void activarPanelTransferirCuenta(ActionEvent e) {
+        this.panelTransferirCuenta.RefrescarDatos();
+        this.ActivarPanel(this.panelTransferirCuenta);
     }
     public void activarPanelCrearTarjeta(ActionEvent e) {
         this.panelABMTarjeta.setearEntidadTarjeta(new Tarjeta(0, 0, 0));
@@ -78,6 +85,10 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
 
     private CuentaFormListar createListarCuentasPanel() {
         return new CuentaFormListar(this);
+    }
+
+    private CuentaFormTransferir createTransferirCuentasPanel() {
+        return new CuentaFormTransferir(this);
     }
 
     private TarjetaFormListar createListarTarjetasPanel() {
@@ -172,13 +183,19 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
     }
 
     @Override
+    public void transferencia(Cuenta cuenta) {
+
+    }
+
+    @Override
     public void bajaTarjeta(String codigoTarjeta) {
 
     }
 
     @Override
     public void altaTarjeta(Tarjeta tarjeta) {
-
+        Mensajeria.getInstancia().MostrarInformacion("Se ha creado la Tarjeta");
+        this.activarPanelListarTarjeta(null);
     }
 
     @Override

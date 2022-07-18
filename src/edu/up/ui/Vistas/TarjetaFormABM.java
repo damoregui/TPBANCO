@@ -90,6 +90,8 @@ public class TarjetaFormABM extends Form
         panelbotonera.add(Box.createHorizontalStrut(10));
         panelbotonera.add(Box.createVerticalStrut(10));
 
+
+
         // action listener para los textfields
 
         botonok.addActionListener(new ActionListener()

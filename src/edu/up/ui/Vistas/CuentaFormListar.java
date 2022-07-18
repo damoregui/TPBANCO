@@ -67,7 +67,6 @@ public class CuentaFormListar extends Form
             }
         });
         modificareliminar.add(botonmodificar);
-
         modificareliminar.add(Box.createHorizontalStrut(10));
 
         JButton botoneliminar = new JButton("Eliminar");

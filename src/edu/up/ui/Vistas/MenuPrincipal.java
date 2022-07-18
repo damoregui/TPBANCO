@@ -60,8 +60,7 @@ public class MenuPrincipal extends JFrame
         JMenuItem transferirEntreCuentas = new JMenuItem("Transferir");
         transferirEntreCuentas.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                handler.activarPanelListarCuenta( e );
+            public void actionPerformed(ActionEvent e) {handler.activarPanelTransferirCuenta( e );
             }
         });
         menuCuentas.add(transferirEntreCuentas);
@@ -91,8 +90,8 @@ public class MenuPrincipal extends JFrame
 
 //-----------------------Le indico al menuBar que me agregue las opciones de cuentas, tarjetas y trf --------------//
         menuBar.add(menuCuentas);
-        menuBar.add(menuTarjetas); // todavía no está activa
-        return menuBar; //devolveme el menuBar al que le acabo de agregar las opciones
+        menuBar.add(menuTarjetas);
+        return menuBar;
     }
 
 }

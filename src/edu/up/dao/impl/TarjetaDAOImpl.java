@@ -48,7 +48,7 @@ public class TarjetaDAOImpl extends DaoObservableTarjeta implements TarjetaDAO
         try
         {
             ConexionDB.getInstancia().executeSQL( sql );
-            this.notificarModificacion( tarjeta );
+            //this.notificarModificacion( tarjeta );
         }
         catch ( ExcepcionConexionDB ex )
         {
@@ -98,25 +98,4 @@ public class TarjetaDAOImpl extends DaoObservableTarjeta implements TarjetaDAO
 
         return resultstarjeta;
     }
-
-
-   public void agregarObservador(IObservadorDeDaoTarjeta observador) {
-
-   }
-
-    @Override
-    public void notificarBaja(String codigoTarjeta) throws ExcepcionTarjeta {
-
-    }
-
-    @Override
-    public void notificarAlta(Tarjeta tarjeta) throws ExcepcionTarjeta {
-
-    }
-
-    @Override
-    public void notificarModificacion(Tarjeta tarjeta) throws ExcepcionTarjeta {
-
-    }
-
 }

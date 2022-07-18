@@ -22,7 +22,7 @@ public class TarjetaBO extends BussinessObjectObservableTarjeta implements IObse
     }
 
     public void grabarTarjeta(Tarjeta tarjeta) throws ExcepcionTarjeta {
-        if (tarjeta.getDniPropietario()>0) {
+        if (tarjeta.getDniPropietario()>0) {    //puedo usar también el codigo = null para ver si no lo tiene creado también
             tarjetaDao.insert(tarjeta);
         } else {
             tarjetaDao.update(tarjeta);

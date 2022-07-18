@@ -22,12 +22,7 @@ public class TarjetaFormListar extends Form
         this.tarjetas.clear();
         this.tarjetas.addAll( this.handler.listarTarjetas() );
     }
-    
-    public void actualizarListaPorCodigoEliminado( String codigo )
-    {
-        this.tarjetas.removeIf( x-> x.getCodigoTarjeta() == codigo );
-    }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Implementacion de Form">
     @Override
     protected String obtenerTitulo()
@@ -51,17 +46,6 @@ public class TarjetaFormListar extends Form
 
         modificareliminar.add(Box.createVerticalStrut(10));
         modificareliminar.add(Box.createHorizontalStrut(10));
-
-      // JButton botonmodificar = new JButton("Modificar");
-      // botonmodificar.addActionListener(new ActionListener()
-      // {
-      //     @Override
-      //     public void actionPerformed(ActionEvent e)
-      //     {
-      //         handler.modificarCuenta( e, tarjetas.get( grilla.getSelectedRow() ) );
-      //     }
-      // });
-      // modificareliminar.add(botonmodificar); nothing
 
         modificareliminar.add(Box.createHorizontalStrut(10));
 

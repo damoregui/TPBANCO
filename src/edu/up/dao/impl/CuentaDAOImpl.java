@@ -16,13 +16,16 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
     {
         String codigo = java.util.UUID.randomUUID().toString().replaceAll("-", "");
 
-        String sql = "INSERT INTO cuentas (codigo, dni, nombre, tipocuenta, saldo) "
+        String sql = "INSERT INTO cuentas (codigo, dni, nombre, tipocuenta, saldo, debito, credito) "
                 + "VALUES ("
                 + "'" + codigo + "', "
                 + cuenta.getDni()+ ", "
                 + "'" + cuenta.getNombre() + "', "
-                + "'" + cuenta.getTipoCuenta()  +  "',"
-                + cuenta.getSaldo() + ")";
+                + "'" + cuenta.getTipoCuenta()  +  "', "
+                + "'" + cuenta.getSaldo() + "', "
+                + "'" + cuenta.getDebito() + "', "
+                + "'" + cuenta.getCredito() + "')";
+
  
         try
         {
@@ -43,6 +46,8 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
                 + "nombre = '" + cuenta.getNombre()+ "', "
                 + "tipocuenta = '" + cuenta.getTipoCuenta()+ "', "
                 + "saldo = " + cuenta.getSaldo()+ " "
+                + "debito = " + cuenta.getDebito()+ " "
+                + "credito = " + cuenta.getCredito()+ " "
                 + "WHERE codigo = '" + cuenta.getCodigo() +"'";
 
         try
@@ -90,7 +95,10 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
                         ConexionDB.getInstancia().obtenerValorResultSetInt(rs, "dni" ),
                         ConexionDB.getInstancia().obtenerValorResultSetString(rs, "nombre" ),
                         ConexionDB.getInstancia().obtenerValorResultSetString(rs, "tipocuenta" ),
-                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldo")));
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldo"),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "debito"),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "credito")));
+
             }
         }
         catch ( ExcepcionConexionDB ex )
@@ -121,7 +129,9 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
                         ConexionDB.getInstancia().obtenerValorResultSetInt(rs, "dni" ),
                         ConexionDB.getInstancia().obtenerValorResultSetString(rs, "nombre" ),
                         ConexionDB.getInstancia().obtenerValorResultSetString(rs, "tipocuenta" ),
-                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldo")));
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldo"),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "debito"),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "credito")));
             }
         }
         catch ( ExcepcionConexionDB ex )
@@ -151,7 +161,9 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
                         ConexionDB.getInstancia().obtenerValorResultSetInt(rs, "dni" ),
                         ConexionDB.getInstancia().obtenerValorResultSetString(rs, "nombre" ),
                         ConexionDB.getInstancia().obtenerValorResultSetString(rs, "tipocuenta" ),
-                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldo")));
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldo"),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "debito"),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "credito")));
             }
 
 

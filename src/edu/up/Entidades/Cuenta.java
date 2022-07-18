@@ -7,13 +7,18 @@ public class Cuenta {
     private String nombre;
     private String tipoCuenta;
     private float saldo;
+    private float credito;
+    private float debito;
 
-    public Cuenta(String codigo, int dni, String nombre, String tipoCuenta, float saldo) {
+
+    public Cuenta(String codigo, int dni, String nombre, String tipoCuenta, float saldo, float debito, float credito) {
         this.codigo = codigo;
         this.dni = dni;
         this.nombre = nombre;
         this.tipoCuenta = tipoCuenta;
         this.saldo = saldo;
+        this.debito = debito;
+        this.credito = credito;
     }
 
     public String getCodigo() {
@@ -54,6 +59,22 @@ public class Cuenta {
 
     public void setSaldo(float saldo) {
         this.saldo = saldo;
+    }
+
+    public float getDebito() {
+        return debito;
+    }
+
+    public void setDebito(float debito) {
+        this.debito = debito;
+    }
+
+    public float getCredito() {
+        return credito;
+    }
+
+    public void setCredito(float credito) {
+        this.credito = credito;
     }
 }
 

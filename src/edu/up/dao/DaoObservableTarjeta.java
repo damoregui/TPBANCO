@@ -20,18 +20,12 @@ public class DaoObservableTarjeta // Clase
         this.observadores.add( observador );
     }
 
-  public void notificarAltaTarjeta( Tarjeta tarjeta ) {
+  public void notificarAlta( Tarjeta tarjeta ) {
       for (IObservadorDeDaoTarjeta object : this.observadores) {
           object.altaEnDaoTarjeta(tarjeta);
       }
   }
-  public void notificarModificacionTarjeta( Tarjeta tarjeta )
-      {
-          for (IObservadorDeDaoTarjeta object : this.observadores) {
-              object.modificacionEnDaoTarjeta(tarjeta);
-          }
-      }
-  public void notificarBajaTarjeta( String codigo ) {
+  public void notificarBaja( String codigo ) {
       for (IObservadorDeDaoTarjeta object : this.observadores) {
           object.bajaEnDaoTarjeta(codigo);
       }
