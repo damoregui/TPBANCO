@@ -1,23 +1,19 @@
 package edu.up.ui.Vistas;
 
-import java.awt.HeadlessException;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.WindowConstants;
 
-public class MenuPrincipal extends JFrame
+public class MenuPrincipalUser extends JFrame
 {
     private HandlerAplicacion handler;
 
-    public MenuPrincipal() throws HeadlessException
+    public MenuPrincipalUser() throws HeadlessException
     {
-        super( "Sistema Bancario / VISTA DE EMPLEADO" );
+        super( "Sistema Bancario / VISTA DE USUARIO" );
 
-        this.handler = new HandlerAplicacion( this );
+        this.handler = new HandlerAplicacion( this);
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(800, 600);
@@ -33,31 +29,21 @@ public class MenuPrincipal extends JFrame
     {
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu menuVistaUsuario = new JMenu("Cambiar a modo usuario");
+        JMenu menuVistaUsuario = new JMenu("Cambiar a modo ADMIN");
         JMenu menuCuentas = new JMenu("Cuenta");
         JMenu menuTarjetas = new JMenu("Tarjetas");
 
-        JMenuItem cambiarVista = new JMenuItem("Cambiar vista a modo usuario");
+        JMenuItem cambiarVista = new JMenuItem("Cambiar vista a modo admin");
         cambiarVista.addActionListener(new ActionListener() {
                                           @Override
                                           public void actionPerformed(ActionEvent e) {
-                                              handler.activarPanelVistaUsuario( e );
+                                              handler.activarPanelAdmin( e );
                                           }
                                       }
         );
         menuVistaUsuario.add(cambiarVista);
 
 // -------------------------------- Agregar crear y Listar a la cuenta ---------------------------------------
-        JMenuItem crearCuenta = new JMenuItem("Crear");
-        crearCuenta.addActionListener(new ActionListener() {
-                                          @Override
-                                          public void actionPerformed(ActionEvent e) {
-                                              handler.activarPanelCrearCuenta( e );
-                                          }
-                                      }
-        );
-        menuCuentas.add(crearCuenta);
-
         JMenuItem listarCuentas = new JMenuItem("Listar");
         listarCuentas.addActionListener(new ActionListener() {
             @Override
@@ -77,16 +63,6 @@ public class MenuPrincipal extends JFrame
 
 // -------------------------------- Agregar crear y Listar Tarjetas ---------------------------------------
 
-        JMenuItem crearTarjeta = new JMenuItem("Crear");
-        crearTarjeta.addActionListener(new ActionListener() {
-                                           @Override
-                                           public void actionPerformed(ActionEvent e) {
-                                               handler.activarPanelCrearTarjeta( e );
-                                           }
-                                       }
-        );
-        menuTarjetas.add(crearTarjeta);
-
         JMenuItem listarTarjeta = new JMenuItem("Listar");
         listarTarjeta.addActionListener(new ActionListener() {
             @Override
@@ -95,6 +71,9 @@ public class MenuPrincipal extends JFrame
             }
         });
         menuTarjetas.add(listarTarjeta);
+
+        JPanel completardni = new JPanel(Boolean.parseBoolean("Ingresar DNI"));
+        menuBar.add(completardni);
 
 //------------------------------------------------------------------------------------------------------------
 

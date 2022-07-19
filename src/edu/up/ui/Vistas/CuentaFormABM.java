@@ -68,6 +68,17 @@ public class CuentaFormABM extends Form
         this.controlCredito.setValor( this.entidad.getCredito() );
     }
 
+    public void consultarEntidad( Cuenta entidad )
+    {
+        this.entidad = entidad;
+
+        this.controlDni.setValor( this.entidad.getDni() );
+        this.controlNombre.setValor( this.entidad.getNombre() );
+        this.controlTipoCta.setValor( this.entidad.getTipoCuenta() );
+        this.controlSaldo.setValor( this.entidad.getSaldo() );
+        this.controlDebito.setValor(this.entidad.getDebito() );
+        this.controlCredito.setValor( this.entidad.getCredito() );
+    }
     // <editor-fold defaultstate="collapsed" desc="Implementacion de Form">
     @Override
     protected String obtenerTitulo()
@@ -192,8 +203,50 @@ public class CuentaFormABM extends Form
         this.add(panelbotonera);
     }
 
-    ;
-
+   // protected void dibujarFormularioConsultaCuentas()
+   // {
+//
+   //     this.controlDni = new ControlInteger( "DNI" );
+   //     this.add( this.controlDni );
+//
+   //     // Agregar botonera
+   //     Container panelbotonera = new JPanel();
+//
+   //     panelbotonera.setSize(800, 100);
+   //     panelbotonera.setLayout(new BoxLayout(panelbotonera, BoxLayout.X_AXIS));
+//
+   //     panelbotonera.add(Box.createVerticalStrut(10));
+   //     panelbotonera.add(Box.createHorizontalStrut(10));
+//
+   //     JButton botonok = new JButton("Ok");
+   //     panelbotonera.add(botonok);
+   //     panelbotonera.add(Box.createHorizontalStrut(10));
+//
+   //     botonok.addActionListener(new ActionListener()
+   //     {
+   //         @Override
+   //         public void actionPerformed(ActionEvent e)
+   //         {
+   //             // Excepcion de DNI //--------------------------------------------------------------------------------
+   //             try
+   //             {
+   //                 entidad.setDni( controlDni.getValor() );
+   //                 if (controlDni.getValor() < 1){
+   //                     throw new ExcepcionCuenta("El dni es invalido por ser menor a 1", null);
+   //                 }
+   //             }
+   //             catch ( ExcepcionCuenta ex )
+   //             {
+   //                 ServicioErrores.getInstancia().informarError(ex, "Error en la carga del campo dni :" );
+   //                 return;
+   //             }
+   //           //  handler.listarCuentasPorDni(controlDni);
+   //         }
+//
+   //     });
+   //     this.add(panelbotonera);
+   // }
+//
 
 }
 // </editor-fold>

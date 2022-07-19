@@ -17,26 +17,23 @@ import java.util.List;
 import javax.swing.JPanel;
 
 public class HandlerAplicacion implements IObservadorDeBussinessObject, IObservadorDeBussinessObjectTarjeta {
-    private final MenuPrincipal formulario;
+    private MenuPrincipalUser formularioUser;
+    private MenuPrincipal formulario;
     private final CuentaBO negocio;
-
     private final TarjetaBO negocioTarjeta;
     private CuentaFormABM panelABMCuenta;
     private CuentaFormListar panelListarCuenta;
-
     private CuentaFormTransferir panelTransferirCuenta;
-
     private TarjetaFormABM panelABMTarjeta;
     private TarjetaFormListar panelListarTarjeta;
 
     public HandlerAplicacion(MenuPrincipal formulario) {
+        this.formulario = formulario;
         this.negocio = new CuentaBO();
         this.negocio.agregarObservador(this);
 
         this.negocioTarjeta = new TarjetaBO();
         this.negocioTarjeta.agregarObservador(this);
-
-        this.formulario = formulario;
 
         this.panelABMCuenta = this.createCuentaPanel();
         this.panelListarCuenta = this.createListarCuentasPanel();
@@ -46,12 +43,44 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
         this.panelListarTarjeta = this.createListarTarjetasPanel();
     }
 
+    public HandlerAplicacion(MenuPrincipalUser formularioUser) {
+
+        this.formularioUser = formularioUser;
+        this.negocio = new CuentaBO();
+        this.negocio.agregarObservador(this);
+
+        this.negocioTarjeta = new TarjetaBO();
+        this.negocioTarjeta.agregarObservador(this);
+
+        this.panelABMCuenta = this.createCuentaPanel();
+        this.panelListarCuenta = this.createListarCuentasPanel();
+        this.panelTransferirCuenta = this.createTransferirCuentasPanel();
+
+        this.panelABMTarjeta = this.createTarjetaPanel();
+        this.panelListarTarjeta = this.createListarTarjetasPanel();
+    }
+
+
+
+
     private void ActivarPanel(JPanel panel) {
         this.formulario.setContentPane(panel);
         this.formulario.revalidate();
         this.formulario.repaint();
     }
 
+
+    public void activarPanelVistaUsuario(ActionEvent e) {
+        MenuPrincipalUser menu2 = new MenuPrincipalUser();
+        HandlerAplicacion handler2 = new HandlerAplicacion(menu2);
+        menu2.mostrar();
+    }
+
+    public void activarPanelAdmin(ActionEvent e) {
+        MenuPrincipal menu = new MenuPrincipal();
+        HandlerAplicacion handler = new HandlerAplicacion(menu);
+        menu.mostrar();
+    }
     // <editor-fold defaultstate="collapsed" desc="Manejo de eventos del menu">
     public void activarPanelCrearCuenta(ActionEvent e) {
         this.panelABMCuenta.setearEntidad(new Cuenta("", 0, "", "", 0, 0, 0));
@@ -134,6 +163,19 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
         return retorno;
     }
 
+ // public List<Cuenta> listarCuentasPorDni(int dni) {
+ //     List<Cuenta> retorno = new LinkedList ();
+
+ //     try {
+ //         retorno = this.negocio.listarCuentasPorDni(int dni)
+ //     } catch (ExcepcionCuenta ex) {
+ //         ServicioErrores.getInstancia().informarError(ex);
+ //     }
+
+ //     return retorno;
+ // }
+// VER CON JOTA ESTO
+
     public List<Tarjeta> listarTarjetas() {
         List<Tarjeta> retorno = new LinkedList<>();
 
@@ -202,5 +244,6 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
     public void modificacionTarjeta(Tarjeta tarjeta) {
 
     }
+
     // </editor-fold>
 }

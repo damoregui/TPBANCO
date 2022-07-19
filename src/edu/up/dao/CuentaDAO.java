@@ -10,7 +10,9 @@ public interface CuentaDAO {
     void delete(Cuenta cuenta) throws ExcepcionCuenta;
     void update(Cuenta cuenta) throws ExcepcionCuenta;
     List<Cuenta> list() throws ExcepcionCuenta;
-    
+
+    List<Cuenta> list(int dni) throws ExcepcionCuenta;
+
     void agregarObservador( IObservadorDeDao observador );
     void notificarBaja( String codigo ) throws ExcepcionCuenta;
     void notificarAlta( Cuenta cuenta ) throws ExcepcionCuenta;
