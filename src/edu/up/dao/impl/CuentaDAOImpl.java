@@ -109,6 +109,7 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
         return results;
     }
 
+
     // AGREGAR ACA LAS TRANSFERENCIAS ENTRE CUENTAS
 
     // CONSULTAR ES EXECUTE QUERY Y PARA EDITARBORRARAGREGAR ES EXECUTEUPDATE

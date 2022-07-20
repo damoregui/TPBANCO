@@ -10,6 +10,8 @@ public interface TarjetaDAO {
     void delete(Tarjeta tarjeta) throws ExcepcionTarjeta;
     void update(Tarjeta tarjeta) throws ExcepcionTarjeta;
     List<Tarjeta> list() throws ExcepcionTarjeta;
+
+    List<Tarjeta> list(int dni) throws ExcepcionTarjeta;
     
     void agregarObservador( IObservadorDeDaoTarjeta observador );
     void notificarBaja( String codigoTarjeta ) throws ExcepcionTarjeta;

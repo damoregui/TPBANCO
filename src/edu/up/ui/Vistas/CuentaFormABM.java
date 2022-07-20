@@ -56,6 +56,7 @@ public class CuentaFormABM extends Form
         super( handler );
     }
 
+
     public void setearEntidad( Cuenta entidad )
     {
         this.entidad = entidad;

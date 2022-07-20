@@ -17,7 +17,7 @@ public class MenuPrincipalUser extends JFrame
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(800, 600);
-        this.setJMenuBar(createMenu()); //Para mostrar el menu bar por que antes no mostraba nada
+        this.setJMenuBar(createMenu());
     }
 
     public void mostrar()
@@ -39,11 +39,12 @@ public class MenuPrincipalUser extends JFrame
                                           public void actionPerformed(ActionEvent e) {
                                               handler.activarPanelAdmin( e );
                                           }
-                                      }
-        );
+                                      });
         menuVistaUsuario.add(cambiarVista);
 
-// -------------------------------- Agregar crear y Listar a la cuenta ---------------------------------------
+// -----------------------------------------------------------------------------------------------------------//
+// -------------------------------- USER:  Listar Cuentas ----------------------------------------------------//
+// -----------------------------------------------------------------------------------------------------------//
         JMenuItem listarCuentas = new JMenuItem("Listar");
         listarCuentas.addActionListener(new ActionListener() {
             @Override
@@ -52,7 +53,9 @@ public class MenuPrincipalUser extends JFrame
             }
         });
         menuCuentas.add(listarCuentas);
-
+// -----------------------------------------------------------------------------------------------------------//
+// -------------------------------- USER: Transferir a otra cuenta--------------------------------------------//
+// -----------------------------------------------------------------------------------------------------------//
         JMenuItem transferirEntreCuentas = new JMenuItem("Transferir");
         transferirEntreCuentas.addActionListener(new ActionListener() {
             @Override
@@ -61,7 +64,9 @@ public class MenuPrincipalUser extends JFrame
         });
         menuCuentas.add(transferirEntreCuentas);
 
-// -------------------------------- Agregar crear y Listar Tarjetas ---------------------------------------
+// -----------------------------------------------------------------------------------------------------------//
+// -------------------------------- USER: listar tarjetas ----------------------------------------------------//
+// -----------------------------------------------------------------------------------------------------------//
 
         JMenuItem listarTarjeta = new JMenuItem("Listar");
         listarTarjeta.addActionListener(new ActionListener() {
@@ -75,9 +80,9 @@ public class MenuPrincipalUser extends JFrame
         JPanel completardni = new JPanel(Boolean.parseBoolean("Ingresar DNI"));
         menuBar.add(completardni);
 
-//------------------------------------------------------------------------------------------------------------
-
-//-----------------------Le indico al menuBar que me agregue las opciones de cuentas, tarjetas y trf --------------//
+//-----------------------------------------------------------------------------------------------------------//
+//-----------------------Le indico al menuBar que me agregue las opciones de cuentas, tarjetas y trf --------//
+//-----------------------------------------------------------------------------------------------------------//
         menuBar.add(menuVistaUsuario);
         menuBar.add(menuCuentas);
         menuBar.add(menuTarjetas);

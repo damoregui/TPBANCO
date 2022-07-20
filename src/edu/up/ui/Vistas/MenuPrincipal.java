@@ -1,13 +1,9 @@
 package edu.up.ui.Vistas;
 
-import java.awt.HeadlessException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 public class MenuPrincipal extends JFrame
 {
@@ -22,6 +18,7 @@ public class MenuPrincipal extends JFrame
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(800, 600);
         this.setJMenuBar(createMenu()); //Para mostrar el menu bar por que antes no mostraba nada
+
     }
 
     public void mostrar()
@@ -32,6 +29,7 @@ public class MenuPrincipal extends JFrame
     private JMenuBar createMenu()
     {
         JMenuBar menuBar = new JMenuBar();
+
 
         JMenu menuVistaUsuario = new JMenu("Cambiar a modo usuario");
         JMenu menuCuentas = new JMenu("Cuenta");
@@ -46,8 +44,9 @@ public class MenuPrincipal extends JFrame
                                       }
         );
         menuVistaUsuario.add(cambiarVista);
-
-// -------------------------------- Agregar crear y Listar a la cuenta ---------------------------------------
+// -----------------------------------------------------------------------------------------------------------//
+// --------------------------------  crear cuenta ------------------------------------------------------------//
+// -----------------------------------------------------------------------------------------------------------//
         JMenuItem crearCuenta = new JMenuItem("Crear");
         crearCuenta.addActionListener(new ActionListener() {
                                           @Override
@@ -57,7 +56,9 @@ public class MenuPrincipal extends JFrame
                                       }
         );
         menuCuentas.add(crearCuenta);
-
+// -----------------------------------------------------------------------------------------------------------//
+// --------------------------------  listar cuenta ------------------------------------------------------------//
+// -----------------------------------------------------------------------------------------------------------//
         JMenuItem listarCuentas = new JMenuItem("Listar");
         listarCuentas.addActionListener(new ActionListener() {
             @Override
@@ -66,7 +67,9 @@ public class MenuPrincipal extends JFrame
             }
         });
         menuCuentas.add(listarCuentas);
-
+// -----------------------------------------------------------------------------------------------------------//
+// --------------------------------  Transferir entre cuentas ------------------------------------------------//
+// -----------------------------------------------------------------------------------------------------------//
         JMenuItem transferirEntreCuentas = new JMenuItem("Transferir");
         transferirEntreCuentas.addActionListener(new ActionListener() {
             @Override
@@ -75,7 +78,9 @@ public class MenuPrincipal extends JFrame
         });
         menuCuentas.add(transferirEntreCuentas);
 
-// -------------------------------- Agregar crear y Listar Tarjetas ---------------------------------------
+// -----------------------------------------------------------------------------------------------------------//
+// --------------------------------  crear tarjetas ------------------------------------------------------------//
+// -----------------------------------------------------------------------------------------------------------//
 
         JMenuItem crearTarjeta = new JMenuItem("Crear");
         crearTarjeta.addActionListener(new ActionListener() {
@@ -86,7 +91,9 @@ public class MenuPrincipal extends JFrame
                                        }
         );
         menuTarjetas.add(crearTarjeta);
-
+// -----------------------------------------------------------------------------------------------------------//
+// --------------------------------  listar tarjetas  ------------------------------------------------------------//
+// -----------------------------------------------------------------------------------------------------------//
         JMenuItem listarTarjeta = new JMenuItem("Listar");
         listarTarjeta.addActionListener(new ActionListener() {
             @Override
@@ -97,11 +104,14 @@ public class MenuPrincipal extends JFrame
         menuTarjetas.add(listarTarjeta);
 
 //------------------------------------------------------------------------------------------------------------
-
 //-----------------------Le indico al menuBar que me agregue las opciones de cuentas, tarjetas y trf --------------//
+// -----------------------------------------------------------------------------------------------------------//
+
+
         menuBar.add(menuVistaUsuario);
         menuBar.add(menuCuentas);
         menuBar.add(menuTarjetas);
+
         return menuBar;
     }
 

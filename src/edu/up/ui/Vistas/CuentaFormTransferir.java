@@ -32,7 +32,7 @@ public class CuentaFormTransferir extends Form
     @Override
     protected String obtenerTitulo()
     {
-        return "Cuentas";
+        return "¿Desde que cuenta desea transferir?";
     }
 
     @Override

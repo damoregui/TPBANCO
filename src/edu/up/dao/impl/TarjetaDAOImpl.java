@@ -98,4 +98,10 @@ public class TarjetaDAOImpl extends DaoObservableTarjeta implements TarjetaDAO
 
         return resultstarjeta;
     }
+
+    //COMPLETAR EL LIST POR DNI
+    @Override
+    public List<Tarjeta> list(int dni) throws ExcepcionTarjeta {
+        return null;
+    }
 }

@@ -18,6 +18,8 @@ public abstract class Form extends JPanel
         this.dibujarFormulario();
     }
 
+
+
     protected abstract String obtenerTitulo();
     protected abstract void dibujarFormulario();
 }
