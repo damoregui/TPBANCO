@@ -27,7 +27,13 @@ public class CuentaFormListar extends Form
         this.cuentas.clear();
         this.cuentas.addAll( this.handler.listarCuentas() );
     }
-    
+
+    public void RefrescarDatosUsuario(int dni)
+    {
+        this.cuentas.clear();
+        this.cuentas.addAll( this.handler.listarCuentasPorDni(dni) );
+    }
+
     public void actualizarListaPorCodigoEliminado( String codigo )
     {
         this.cuentas.removeIf( x-> x.getCodigo() == codigo );

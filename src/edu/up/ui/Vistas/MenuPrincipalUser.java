@@ -1,5 +1,7 @@
 package edu.up.ui.Vistas;
 
+import edu.up.Excepciones.DatoInvalidoException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +10,8 @@ import java.awt.event.ActionListener;
 public class MenuPrincipalUser extends JFrame
 {
     private HandlerAplicacion handler;
+
+    private int dni;
 
     public MenuPrincipalUser() throws HeadlessException
     {
@@ -20,9 +24,31 @@ public class MenuPrincipalUser extends JFrame
         this.setJMenuBar(createMenu());
     }
 
-    public void mostrar()
-    {
+    public void mostrar() throws DatoInvalidoException {
+        String s = JOptionPane.showInputDialog(
+                this,
+                "Ingrese DNI",
+                "Ingrese DNI",
+                JOptionPane.PLAIN_MESSAGE
+                );
+
+        //If a string was returned, say so.
+        if ((s != null) && (s.trim().length() > 0)) {
+            try {
+                this.dni = Integer.parseInt(s.trim());
+            } catch (Exception ex) {
+                throw new DatoInvalidoException("El DNI es incorrecto: " + s, ex);
+            }
+        } else {
+            throw new DatoInvalidoException("El DNI es incorrecto");
+        }
+
         this.setVisible(true);
+    }
+
+    public void ocultar()
+    {
+        this.setVisible(false);
     }
 
     private JMenuBar createMenu()
@@ -49,7 +75,7 @@ public class MenuPrincipalUser extends JFrame
         listarCuentas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handler.activarPanelListarCuenta( e );
+                handler.activarPanelListarCuentaUsuario( e , dni);
             }
         });
         menuCuentas.add(listarCuentas);
@@ -68,17 +94,14 @@ public class MenuPrincipalUser extends JFrame
 // -------------------------------- USER: listar tarjetas ----------------------------------------------------//
 // -----------------------------------------------------------------------------------------------------------//
 
-        JMenuItem listarTarjeta = new JMenuItem("Listar");
+        JMenuItem listarTarjeta = new JMenuItem("Listar Tarjetas");
         listarTarjeta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                handler.activarPanelListarTarjeta( e );
+                handler.activarPanelListarTarjetaUsuario( e , dni);
             }
         });
         menuTarjetas.add(listarTarjeta);
-
-        JPanel completardni = new JPanel(Boolean.parseBoolean("Ingresar DNI"));
-        menuBar.add(completardni);
 
 //-----------------------------------------------------------------------------------------------------------//
 //-----------------------Le indico al menuBar que me agregue las opciones de cuentas, tarjetas y trf --------//

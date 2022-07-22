@@ -8,6 +8,8 @@ import edu.up.ui.Vistas.MenuPrincipalUser;
 
 public class Main
 {
+    public static final MenuPrincipalUser menuUsuario = new MenuPrincipalUser();
+    public static final MenuPrincipal menuAdministrador = new MenuPrincipal();
     public static void main(String[] args)
     {
         try
@@ -19,14 +21,13 @@ public class Main
             ServicioErrores.getInstancia().informarError( ex );
             System.exit(0);
         }
-       // MenuPrincipalUser menu2 = new MenuPrincipalUser();
-        MenuPrincipal menu = new MenuPrincipal();
 
-      //  HandlerAplicacion handler2 = new HandlerAplicacion(menu2);
-        HandlerAplicacion handler = new HandlerAplicacion(menu);
 
-        menu.mostrar();
-       // menu2.mostrar();
+        //new HandlerAplicacion(menuUsuario);
+        //new HandlerAplicacion(menuAdministrador);
+
+        menuUsuario.ocultar();
+        menuAdministrador.mostrar();
         
     }
 }

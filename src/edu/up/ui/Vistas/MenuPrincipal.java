@@ -26,6 +26,9 @@ public class MenuPrincipal extends JFrame
         this.setVisible(true);
     }
 
+    public void ocultar() {
+        this.setVisible(false);
+    }
     private JMenuBar createMenu()
     {
         JMenuBar menuBar = new JMenuBar();

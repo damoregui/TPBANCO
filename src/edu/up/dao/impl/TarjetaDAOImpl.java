@@ -55,7 +55,7 @@ public class TarjetaDAOImpl extends DaoObservableTarjeta implements TarjetaDAO
             throw new ExcepcionTarjeta( "Error al hacer update al registro de la tarjeta", ex );
         }
     }
-    
+
     @Override
     public void delete( Tarjeta tarjeta ) throws ExcepcionTarjeta
     {
@@ -99,9 +99,29 @@ public class TarjetaDAOImpl extends DaoObservableTarjeta implements TarjetaDAO
         return resultstarjeta;
     }
 
-    //COMPLETAR EL LIST POR DNI
-    @Override
-    public List<Tarjeta> list(int dni) throws ExcepcionTarjeta {
-        return null;
+    public List<Tarjeta> list(int dni) throws ExcepcionTarjeta
+    {
+        List<Tarjeta> resultstarjeta = new LinkedList<>();
+
+        try
+        {
+            String sql = "SELECT * FROM tarjetas where dnipropietario = " + dni;
+
+            ResultSet rs = ConexionDB.getInstancia().ObtenerResultSet( sql );
+
+            while ( ConexionDB.getInstancia().avanzarResultSet( rs ) )
+            {
+                resultstarjeta.add(new Tarjeta(
+                        ConexionDB.getInstancia().obtenerValorResultSetInt(rs, "dnipropietario" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "limite" ),
+                        ConexionDB.getInstancia().obtenerValorResultSetFloat(rs, "saldotarjeta")));
+            }
+        }
+        catch ( ExcepcionConexionDB ex )
+        {
+            throw new ExcepcionTarjeta( "Error al obtener listado de Tarjetas", ex );
+        }
+
+        return resultstarjeta;
     }
 }

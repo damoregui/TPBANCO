@@ -2,8 +2,10 @@ package edu.up.ui.Vistas;
 
 import edu.up.Entidades.Cuenta;
 import edu.up.Entidades.Tarjeta;
+import edu.up.Excepciones.DatoInvalidoException;
 import edu.up.Excepciones.ExcepcionTarjeta;
 import edu.up.Excepciones.ExcepcionCuenta;
+import edu.up.Main;
 import edu.up.Mensajeria;
 import edu.up.Negocio.CuentaBO;
 import edu.up.Negocio.IObservadorDeBussinessObject;
@@ -14,7 +16,7 @@ import edu.up.ServicioErrores;
 import java.awt.event.ActionEvent;
 import java.util.LinkedList;
 import java.util.List;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class HandlerAplicacion implements IObservadorDeBussinessObject, IObservadorDeBussinessObjectTarjeta {
     private MenuPrincipalUser formularioUser;
@@ -62,48 +64,77 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
 
 
 
+// asi como estan separados el activar panel y el activar panel user, tengo que seguir separando el menu.
 
-    private void ActivarPanel(JPanel panel) {
+    private void activarPanel(JPanel panel) {
         this.formulario.setContentPane(panel);
         this.formulario.revalidate();
         this.formulario.repaint();
     }
 
+    private void activarPanelUser(JPanel panel) {
+        this.formularioUser.setContentPane(panel);
+        this.formularioUser.revalidate();
+        this.formularioUser.repaint();
+    }
+
 
     public void activarPanelVistaUsuario(ActionEvent e) {
-        MenuPrincipalUser menu2 = new MenuPrincipalUser();
-        HandlerAplicacion handler2 = new HandlerAplicacion(menu2);
-        menu2.mostrar();
+        //MenuPrincipalUser menu2 = new MenuPrincipalUser();
+        //new HandlerAplicacion(menu2);
+        try {
+            Main.menuUsuario.mostrar();
+            Main.menuAdministrador.ocultar();
+        } catch (DatoInvalidoException ex) {
+            //custom title, error icon
+            JOptionPane.showMessageDialog(Main.menuAdministrador,
+                    ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            throw new RuntimeException(ex);
+        }
     }
 
     public void activarPanelAdmin(ActionEvent e) {
-        MenuPrincipal menu = new MenuPrincipal();
-        HandlerAplicacion handler = new HandlerAplicacion(menu);
-        menu.mostrar();
+        //MenuPrincipal menu = new MenuPrincipal();
+        //new HandlerAplicacion(menu);
+        Main.menuAdministrador.mostrar();
+        Main.menuUsuario.ocultar();
     }
     // <editor-fold defaultstate="collapsed" desc="Manejo de eventos del menu">
     public void activarPanelCrearCuenta(ActionEvent e) {
         this.panelABMCuenta.setearEntidad(new Cuenta("", 0, "", "", 0, 0, 0));
-        this.ActivarPanel(this.panelABMCuenta);
+        this.activarPanel(this.panelABMCuenta);
     }
+
+
 
     public void activarPanelListarCuenta(ActionEvent e) {
         this.panelListarCuenta.RefrescarDatos();
-        this.ActivarPanel(this.panelListarCuenta);
+        this.activarPanel(this.panelListarCuenta);
+    }
+    // CREAR EL RESTO DE LOS ACTIVARPANELLISTARUSUARIO       TAMBIÉN (ESTO ESTA VISTO CON J)
+    public void activarPanelListarCuentaUsuario(ActionEvent e, int dni) {
+        this.panelListarCuenta.RefrescarDatosUsuario(dni);
+        this.activarPanelUser(this.panelListarCuenta);
     }
     public void activarPanelTransferirCuenta(ActionEvent e) {
         this.panelTransferirCuenta.RefrescarDatos();
-        this.ActivarPanel(this.panelTransferirCuenta);
+        this.activarPanel(this.panelTransferirCuenta);
     }
     public void activarPanelCrearTarjeta(ActionEvent e) {
         this.panelABMTarjeta.setearEntidadTarjeta(new Tarjeta(0, 0, 0));
-        this.ActivarPanel(this.panelABMTarjeta);
+        this.activarPanel(this.panelABMTarjeta);
     }
     public void activarPanelListarTarjeta(ActionEvent e) {
         this.panelListarTarjeta.RefrescarDatos();
-        this.ActivarPanel(this.panelListarTarjeta);
+        this.activarPanel(this.panelListarTarjeta);
     }
 
+    public void activarPanelListarTarjetaUsuario(ActionEvent e, int dni) {
+        this.panelListarTarjeta.RefrescarDatosUsuario(dni);
+        this.activarPanelUser(this.panelListarTarjeta);
+    }
     private CuentaFormABM createCuentaPanel() {
         return new CuentaFormABM(this);
     }
@@ -127,7 +158,7 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
 
     public void modificarCuenta(ActionEvent e, Cuenta cuenta) {
         this.panelABMCuenta.setearEntidad(cuenta);
-        this.ActivarPanel(this.panelABMCuenta);
+        this.activarPanel(this.panelABMCuenta);
     }
     // </editor-fold>
 
@@ -163,18 +194,28 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
         return retorno;
     }
 
- // public List<Cuenta> listarCuentasPorDni(int dni) {
- //     List<Cuenta> retorno = new LinkedList ();
+ public List<Cuenta> listarCuentasPorDni(int dni) {
+      List<Cuenta> retorno = new LinkedList ();
 
- //     try {
- //         retorno = this.negocio.listarCuentasPorDni(int dni)
- //     } catch (ExcepcionCuenta ex) {
- //         ServicioErrores.getInstancia().informarError(ex);
- //     }
+      try {
+          retorno = this.negocio.listarCuentas(dni);
+      } catch (ExcepcionCuenta ex) {
+          ServicioErrores.getInstancia().informarError(ex);
+      }
+      return retorno;
+  }
 
- //     return retorno;
- // }
-// VER CON JOTA ESTO
+    public List<Tarjeta> listarTarjetasPorDni(int dni) {
+        List<Tarjeta> retorno = new LinkedList ();
+
+        try {
+            retorno = this.negocioTarjeta.listarTarjetas(dni);
+        } catch (ExcepcionTarjeta ex) {
+            ServicioErrores.getInstancia().informarError(ex);
+        }
+        return retorno;
+    }
+
 
     public List<Tarjeta> listarTarjetas() {
         List<Tarjeta> retorno = new LinkedList<>();
@@ -207,7 +248,7 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
 
     // <editor-fold defaultstate="collapsed" desc="Interfaz IObservadorDeBussinessObject">
     public void baja(String codigo) {
-        //Mensajeria.getInstancia().MostrarInformacion( "Baja" + codigo  );
+        Mensajeria.getInstancia().MostrarInformacion( "Baja" + codigo  );
         this.panelListarCuenta.actualizarListaPorCodigoEliminado(codigo);
         this.panelListarCuenta.repaint();
     }

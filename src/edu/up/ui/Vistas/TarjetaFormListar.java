@@ -23,6 +23,12 @@ public class TarjetaFormListar extends Form
         this.tarjetas.addAll( this.handler.listarTarjetas() );
     }
 
+    public void RefrescarDatosUsuario(int dni)
+    {
+        this.tarjetas.clear();
+        this.tarjetas.addAll( this.handler.listarTarjetasPorDni(dni));
+    }
+
     // <editor-fold defaultstate="collapsed" desc="Implementacion de Form">
     @Override
     protected String obtenerTitulo()

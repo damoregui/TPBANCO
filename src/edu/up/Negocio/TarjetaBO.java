@@ -1,6 +1,8 @@
 package edu.up.Negocio;
 
+import edu.up.Entidades.Cuenta;
 import edu.up.Entidades.Tarjeta;
+import edu.up.Excepciones.ExcepcionCuenta;
 import edu.up.Excepciones.ExcepcionTarjeta;
 import edu.up.dao.TarjetaDAO;
 import edu.up.dao.IObservadorDeDaoTarjeta;
@@ -37,6 +39,10 @@ public class TarjetaBO extends BussinessObjectObservableTarjeta implements IObse
         return tarjetaDao.list();
     }
 
+    public List<Tarjeta> listarTarjetas (int dni) throws  ExcepcionTarjeta { //esto es sobrecarga
+        return tarjetaDao.list(dni);
+    }
+
 // @Override
    public void altaEnDaoTarjeta( Tarjeta tarjeta )
    {
@@ -46,10 +52,5 @@ public class TarjetaBO extends BussinessObjectObservableTarjeta implements IObse
    public void bajaEnDaoTarjeta( String codigoTarjeta )
    {
        this.notificarBajaTarjeta( codigoTarjeta );
-   }
-
-   public void modificacionEnDaoTarjeta( Tarjeta tarjeta)
-   {
-       this.notificarModificacionTarjeta( tarjeta );
    }
 }

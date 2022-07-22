@@ -2,9 +2,12 @@ package edu.up.Excepciones;
 
 public class DatoInvalidoException extends Exception
 {
-    public DatoInvalidoException( Exception excepcion )
+    public DatoInvalidoException(String message) {
+        super(message);
+    }
+
+    public DatoInvalidoException( String message, Exception cause )
     {
-        super( "Dato invalido." + excepcion.getMessage() );
-        this.initCause(excepcion);
+        super( message, cause);
     }
 }

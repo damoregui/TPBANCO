@@ -45,7 +45,7 @@ public class CuentaBO extends BussinessObjectObservable implements IObservadorDe
         return cuentaDao.list();
     }
 
-    public List<Cuenta> listarCuentasPorDni(int dni) throws ExcepcionCuenta{
+    public List<Cuenta> listarCuentas (int dni) throws ExcepcionCuenta{ //esto es sobrecarga
         return cuentaDao.list(dni);
     }
 
