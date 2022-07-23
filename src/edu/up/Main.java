@@ -22,10 +22,8 @@ public class Main
             System.exit(0);
         }
 
-
         //new HandlerAplicacion(menuUsuario);
         //new HandlerAplicacion(menuAdministrador);
-
         menuUsuario.ocultar();
         menuAdministrador.mostrar();
         

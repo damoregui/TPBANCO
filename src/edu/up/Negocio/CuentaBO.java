@@ -49,9 +49,6 @@ public class CuentaBO extends BussinessObjectObservable implements IObservadorDe
         return cuentaDao.list(dni);
     }
 
-    //VER CON JOTA EL LISTAR CUENTA POR DNI
-
-
     @Override
     public void altaEnDao( Cuenta cuenta )
     {
@@ -77,7 +74,7 @@ public class CuentaBO extends BussinessObjectObservable implements IObservadorDe
             cuentaDao.update(cuentaOrigen);
             cuentaDao.update(cuentaDestino);
         } else {
-            //Mostrar mensaje de error por monto
+
         }
     }
 }

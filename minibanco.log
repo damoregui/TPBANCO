@@ -5098,3 +5098,61 @@ SELECT * FROM tarjetas where dni = 234 [42122-176]
 	... 43 more
 
 ------------------------------------------------
+------------------------------------------------
+Se produjo un error de acceso a datos.
+edu.up.Excepciones.ExcepcionConexionDB: Se produjo un error de acceso a datos.
+	at edu.up.basics.ConexionDB.executeSQL(ConexionDB.java:53)
+	at edu.up.basics.TableManager.createtable(TableManager.java:18)
+	at edu.up.Main.main(Main.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: Tipo de dato desconocido : "("
+Unknown data type: "("; SQL statement:
+CREATE TABLE IF NOT EXISTS movimientos (codigoCuenta VARCHAR(40), tipoMovimiento(VARCHAR(40), cantidadmovimiento DECIMAL (15 ,4) [50004-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3963)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3826)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5723)
+	at org.h2.command.Parser.parseCreate(Parser.java:4122)
+	at org.h2.command.Parser.parsePrepared(Parser.java:351)
+	at org.h2.command.Parser.parse(Parser.java:306)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.prepareCommand(Parser.java:243)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:128)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:117)
+	at edu.up.basics.ConexionDB.executeSQL(ConexionDB.java:38)
+	... 2 more
+
+------------------------------------------------
+------------------------------------------------
+Se produjo un error de acceso a datos.
+edu.up.Excepciones.ExcepcionConexionDB: Se produjo un error de acceso a datos.
+	at edu.up.basics.ConexionDB.executeSQL(ConexionDB.java:53)
+	at edu.up.basics.TableManager.createtable(TableManager.java:18)
+	at edu.up.Main.main(Main.java:17)
+Caused by: org.h2.jdbc.JdbcSQLException: Tipo de dato desconocido : "("
+Unknown data type: "("; SQL statement:
+CREATE TABLE IF NOT EXISTS movimientos (codigoCuenta VARCHAR(40), tipoMovimiento(VARCHAR(40), cantidadmovimiento DECIMAL (15 ,4) ) [50004-176]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:344)
+	at org.h2.message.DbException.get(DbException.java:178)
+	at org.h2.message.DbException.get(DbException.java:154)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:3963)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:3826)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:5723)
+	at org.h2.command.Parser.parseCreate(Parser.java:4122)
+	at org.h2.command.Parser.parsePrepared(Parser.java:351)
+	at org.h2.command.Parser.parse(Parser.java:306)
+	at org.h2.command.Parser.parse(Parser.java:278)
+	at org.h2.command.Parser.prepareCommand(Parser.java:243)
+	at org.h2.engine.Session.prepareLocal(Session.java:442)
+	at org.h2.engine.Session.prepareCommand(Session.java:384)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:128)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:117)
+	at edu.up.basics.ConexionDB.executeSQL(ConexionDB.java:38)
+	... 2 more
+
+------------------------------------------------

@@ -12,6 +12,8 @@ public class MenuPrincipalUser extends JFrame
     private HandlerAplicacion handler;
 
     private int dni;
+    private int cuentaDestino;
+    private int cuentaOrigen;
 
     public MenuPrincipalUser() throws HeadlessException
     {
@@ -31,8 +33,6 @@ public class MenuPrincipalUser extends JFrame
                 "Ingrese DNI",
                 JOptionPane.PLAIN_MESSAGE
                 );
-
-        //If a string was returned, say so.
         if ((s != null) && (s.trim().length() > 0)) {
             try {
                 this.dni = Integer.parseInt(s.trim());
@@ -85,9 +85,13 @@ public class MenuPrincipalUser extends JFrame
         JMenuItem transferirEntreCuentas = new JMenuItem("Transferir");
         transferirEntreCuentas.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {handler.activarPanelTransferirCuenta( e );
+            public void actionPerformed(ActionEvent e) {handler.activarPanelTransferirCuenta( e, dni);
             }
-        });
+
+        }
+
+        );
+
         menuCuentas.add(transferirEntreCuentas);
 
 // -----------------------------------------------------------------------------------------------------------//

@@ -17,8 +17,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class CuentaFormABM extends Form
-{
+public class CuentaFormABM extends Form {
     // <editor-fold defaultstate="collapsed" desc="Propiedades">        
     private ControlTexto controlNombre;
     private ControlInteger controlDni;
@@ -27,86 +26,81 @@ public class CuentaFormABM extends Form
     private ControlFloat controlDebito;
     private ControlFloat controlCredito;
 
-    public ControlTexto getControlNombre()
-    {
+    public ControlTexto getControlNombre() {
         return controlNombre;
     }
-    public ControlInteger getControlDni()
-    {
+
+    public ControlInteger getControlDni() {
         return controlDni;
     }
-    public ControlFloat getControlSaldo()
-    {
+
+    public ControlFloat getControlSaldo() {
         return controlSaldo;
     }
-    public ControlFloat getControlCredito()
-    {
+
+    public ControlFloat getControlCredito() {
         return controlCredito;
     }
-    public ControlFloat getControlDebito()
-    {
+
+    public ControlFloat getControlDebito() {
         return controlDebito;
     }
 
     private Cuenta entidad;
     // </editor-fold>
 
-    public CuentaFormABM( HandlerAplicacion handler )
-    {
-        super( handler );
+    public CuentaFormABM(HandlerAplicacion handler) {
+        super(handler);
     }
 
 
-    public void setearEntidad( Cuenta entidad )
-    {
+    public void setearEntidad(Cuenta entidad) {
         this.entidad = entidad;
 
-        this.controlDni.setValor( this.entidad.getDni() );
-        this.controlNombre.setValor( this.entidad.getNombre() );
-        this.controlTipoCta.setValor( this.entidad.getTipoCuenta() );
-        this.controlSaldo.setValor( this.entidad.getSaldo() );
-        this.controlDebito.setValor(this.entidad.getDebito() );
-        this.controlCredito.setValor( this.entidad.getCredito() );
+        this.controlDni.setValor(this.entidad.getDni());
+        this.controlNombre.setValor(this.entidad.getNombre());
+        this.controlTipoCta.setValor(this.entidad.getTipoCuenta());
+        this.controlSaldo.setValor(this.entidad.getSaldo());
+        this.controlDebito.setValor(this.entidad.getDebito());
+        this.controlCredito.setValor(this.entidad.getCredito());
     }
 
-    public void consultarEntidad( Cuenta entidad )
-    {
+    public void consultarEntidad(Cuenta entidad) {
         this.entidad = entidad;
 
-        this.controlDni.setValor( this.entidad.getDni() );
-        this.controlNombre.setValor( this.entidad.getNombre() );
-        this.controlTipoCta.setValor( this.entidad.getTipoCuenta() );
-        this.controlSaldo.setValor( this.entidad.getSaldo() );
-        this.controlDebito.setValor(this.entidad.getDebito() );
-        this.controlCredito.setValor( this.entidad.getCredito() );
+        this.controlDni.setValor(this.entidad.getDni());
+        this.controlNombre.setValor(this.entidad.getNombre());
+        this.controlTipoCta.setValor(this.entidad.getTipoCuenta());
+        this.controlSaldo.setValor(this.entidad.getSaldo());
+        this.controlDebito.setValor(this.entidad.getDebito());
+        this.controlCredito.setValor(this.entidad.getCredito());
     }
+
     // <editor-fold defaultstate="collapsed" desc="Implementacion de Form">
     @Override
-    protected String obtenerTitulo()
-    {
+    protected String obtenerTitulo() {
         return "Cuenta";
     }
 
     @Override
-    protected void dibujarFormulario()
-    {
-        this.controlNombre = new ControlTexto( "Nombre" );
-        this.add( this.controlNombre );
+    protected void dibujarFormulario() {
+        this.controlNombre = new ControlTexto("Nombre");
+        this.add(this.controlNombre);
 
-        this.controlDni = new ControlInteger( "DNI" );
-        this.add( this.controlDni );
+        this.controlDni = new ControlInteger("DNI");
+        this.add(this.controlDni);
 
-        this.controlTipoCta = new ControlTexto( "Tipo de cuenta (CC / CA / CD)" );
-        this.add( this.controlTipoCta );
+        this.controlTipoCta = new ControlTexto("Tipo de cuenta (CC / CA / CD)");
+        this.add(this.controlTipoCta);
 
-        this.controlSaldo = new ControlFloat( "Saldo" );
-        this.add( this.controlSaldo );
+        this.controlSaldo = new ControlFloat("Saldo");
+        this.add(this.controlSaldo);
 
-        this.controlDebito = new ControlFloat( "Debito" );
-        this.add( this.controlDebito );
+        this.controlDebito = new ControlFloat("Debito");
+        this.add(this.controlDebito);
 
-        this.controlCredito = new ControlFloat( "Saldo" );
-        this.add( this.controlCredito );
+        this.controlCredito = new ControlFloat("Saldo");
+        this.add(this.controlCredito);
         // Agregar botonera
         Container panelbotonera = new JPanel();
 
@@ -128,29 +122,24 @@ public class CuentaFormABM extends Form
 
         // action listener para los textfields
 
-        botonok.addActionListener(new ActionListener()
-        {
+        botonok.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 // excepcion de nombre // ----------------------------------------------------------------------------
-                try{
-                    entidad.setNombreCompleto( controlNombre.getValor() );
-                } catch (ExcepcionCuenta excepcion){
+                try {
+                    entidad.setNombreCompleto(controlNombre.getValor());
+                } catch (ExcepcionCuenta excepcion) {
                     ServicioErrores.getInstancia().informarError(excepcion, "Error en la carga del campo NOMBRE");
                     return;
                 }
                 // Excepcion de DNI //--------------------------------------------------------------------------------
-                try
-                {
-                    entidad.setDni( controlDni.getValor() );
-                    if (controlDni.getValor() < 1){
+                try {
+                    entidad.setDni(controlDni.getValor());
+                    if (controlDni.getValor() < 1) {
                         throw new ExcepcionCuenta("El dni es invalido por ser menor a 1", null);
                     }
-                }
-                catch ( ExcepcionCuenta ex )
-                {
-                    ServicioErrores.getInstancia().informarError(ex, "Error en la carga del campo dni :" );
+                } catch (ExcepcionCuenta ex) {
+                    ServicioErrores.getInstancia().informarError(ex, "Error en la carga del campo dni :");
                     return;
                 }
                 // Excepcion de Tipo cuenta //-----------------------------------------------------------------------
@@ -162,9 +151,8 @@ public class CuentaFormABM extends Form
                     entidad.setTipoCuenta(controlTipoCta.getValor());
                     //if (!(controlTipoCta.getValor()).equals(valoresArray.contains(0)))
                     if (!valoresArray.contains((controlTipoCta.getValor().toUpperCase())))
-                            throw new ExcepcionCuenta("ESTE CAMPO SOLO ADMITE LOS VALORES:\n ´CA´ / ´CC´ / ´CD´. Modifiquelo por favor", null);
-                    }
-                catch (ExcepcionCuenta excepcionCuenta) {
+                        throw new ExcepcionCuenta("ESTE CAMPO SOLO ADMITE LOS VALORES:\n ´CA´ / ´CC´ / ´CD´. Modifiquelo por favor", null);
+                } catch (ExcepcionCuenta excepcionCuenta) {
                     ServicioErrores.getInstancia().informarError(excepcionCuenta, "Error en la carga del tipo de cuenta \n");
                     return;
                 }
@@ -203,53 +191,5 @@ public class CuentaFormABM extends Form
         });
         this.add(panelbotonera);
     }
-
-   // protected void dibujarFormularioConsultaCuentas()
-   // {
-//
-   //     this.controlDni = new ControlInteger( "DNI" );
-   //     this.add( this.controlDni );
-//
-   //     // Agregar botonera
-   //     Container panelbotonera = new JPanel();
-//
-   //     panelbotonera.setSize(800, 100);
-   //     panelbotonera.setLayout(new BoxLayout(panelbotonera, BoxLayout.X_AXIS));
-//
-   //     panelbotonera.add(Box.createVerticalStrut(10));
-   //     panelbotonera.add(Box.createHorizontalStrut(10));
-//
-   //     JButton botonok = new JButton("Ok");
-   //     panelbotonera.add(botonok);
-   //     panelbotonera.add(Box.createHorizontalStrut(10));
-//
-   //     botonok.addActionListener(new ActionListener()
-   //     {
-   //         @Override
-   //         public void actionPerformed(ActionEvent e)
-   //         {
-   //             // Excepcion de DNI //--------------------------------------------------------------------------------
-   //             try
-   //             {
-   //                 entidad.setDni( controlDni.getValor() );
-   //                 if (controlDni.getValor() < 1){
-   //                     throw new ExcepcionCuenta("El dni es invalido por ser menor a 1", null);
-   //                 }
-   //             }
-   //             catch ( ExcepcionCuenta ex )
-   //             {
-   //                 ServicioErrores.getInstancia().informarError(ex, "Error en la carga del campo dni :" );
-   //                 return;
-   //             }
-   //           //  handler.listarCuentasPorDni(controlDni);
-   //         }
-//
-   //     });
-   //     this.add(panelbotonera);
-   // }
-//
-
 }
-// </editor-fold>
-
 

@@ -11,9 +11,11 @@ public class TableManager {
         String sql = "CREATE TABLE IF NOT EXISTS cuentas ( codigo VARCHAR(40), nombre VARCHAR(256), dni INTEGER, tipocuenta VARCHAR(2), saldo DECIMAL( 15,4), debito DECIMAL( 15,4), credito DECIMAL( 15,4))";
         String sql2 = "CREATE TABLE IF NOT EXISTS tarjetas ( codigoTarjeta VARCHAR(40), dnipropietario INTEGER, limite DECIMAL( 15,4), saldotarjeta DECIMAL (15,4) )";
         String sql3 = "CREATE TABLE IF NOT EXISTS users ( codigoUsuario VARCHAR(40), dniusuario INTEGER, tipousuario VARCHAR(40), nombreusuario VARCHAR(40) )";
+        String sql4 = "CREATE TABLE IF NOT EXISTS movimientos (codigoCuenta VARCHAR(40), tipoMovimiento VARCHAR(40), cantidadmovimiento DECIMAL (15 ,4) )";
         ConexionDB.getInstancia().executeSQL( sql );
         ConexionDB.getInstancia().executeSQL( sql2 );
         ConexionDB.getInstancia().executeSQL( sql3 );
+        ConexionDB.getInstancia().executeSQL( sql4 );
 
     }
 	

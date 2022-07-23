@@ -118,9 +118,9 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
         this.panelListarCuenta.RefrescarDatosUsuario(dni);
         this.activarPanelUser(this.panelListarCuenta);
     }
-    public void activarPanelTransferirCuenta(ActionEvent e) {
-        this.panelTransferirCuenta.RefrescarDatos();
-        this.activarPanel(this.panelTransferirCuenta);
+    public void activarPanelTransferirCuenta(ActionEvent e, int dni) {
+        this.panelTransferirCuenta.RefrescarDatosUsuario(dni);
+        this.activarPanelUser(this.panelTransferirCuenta);
     }
     public void activarPanelCrearTarjeta(ActionEvent e) {
         this.panelABMTarjeta.setearEntidadTarjeta(new Tarjeta(0, 0, 0));
@@ -268,6 +268,14 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
     @Override
     public void transferencia(Cuenta cuenta) {
 
+    }
+
+    public void transferenciaCuentas(Cuenta cuentaOrigen, Cuenta cuentaDestino, float monto) {
+        try {
+            this.negocio.transferirMonto(cuentaOrigen, cuentaDestino, monto);
+        }catch (ExcepcionCuenta ex){
+            ServicioErrores.getInstancia().informarError(ex);
+        }
     }
 
     @Override

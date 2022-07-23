@@ -47,6 +47,7 @@ public class MenuPrincipal extends JFrame
                                       }
         );
         menuVistaUsuario.add(cambiarVista);
+
 // -----------------------------------------------------------------------------------------------------------//
 // --------------------------------  crear cuenta ------------------------------------------------------------//
 // -----------------------------------------------------------------------------------------------------------//
@@ -70,16 +71,6 @@ public class MenuPrincipal extends JFrame
             }
         });
         menuCuentas.add(listarCuentas);
-// -----------------------------------------------------------------------------------------------------------//
-// --------------------------------  Transferir entre cuentas ------------------------------------------------//
-// -----------------------------------------------------------------------------------------------------------//
-        JMenuItem transferirEntreCuentas = new JMenuItem("Transferir");
-        transferirEntreCuentas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {handler.activarPanelTransferirCuenta( e );
-            }
-        });
-        menuCuentas.add(transferirEntreCuentas);
 
 // -----------------------------------------------------------------------------------------------------------//
 // --------------------------------  crear tarjetas ------------------------------------------------------------//
