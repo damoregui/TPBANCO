@@ -62,18 +62,17 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
         this.panelListarTarjeta = this.createListarTarjetasPanel();
     }
 
-
-
-// asi como estan separados el activar panel y el activar panel user, tengo que seguir separando el menu.
-
     private void activarPanel(JPanel panel) {
+        this.formulario.getContentPane().setVisible(false);
         this.formulario.setContentPane(panel);
+        panel.setVisible(true);
         this.formulario.revalidate();
         this.formulario.repaint();
     }
-
     private void activarPanelUser(JPanel panel) {
+        this.formularioUser.getContentPane().setVisible(false);
         this.formularioUser.setContentPane(panel);
+        panel.setVisible(true);
         this.formularioUser.revalidate();
         this.formularioUser.repaint();
     }
@@ -156,7 +155,7 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
     }
 
 
-    public void modificarCuenta(ActionEvent e, Cuenta cuenta) {
+    public void modificarCuenta(Cuenta cuenta) {
         this.panelABMCuenta.setearEntidad(cuenta);
         this.activarPanel(this.panelABMCuenta);
     }
@@ -205,6 +204,17 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
       return retorno;
   }
 
+    public Cuenta listarCuentasPorCodigo(String codigo) {
+        Cuenta retorno = null;
+
+        try {
+            retorno = this.negocio.devolverCuenta(codigo);
+        } catch (ExcepcionCuenta ex) {
+            ServicioErrores.getInstancia().informarError(ex);
+        }
+        return retorno;
+    }
+
     public List<Tarjeta> listarTarjetasPorDni(int dni) {
         List<Tarjeta> retorno = new LinkedList ();
 
@@ -215,6 +225,7 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
         }
         return retorno;
     }
+
 
 
     public List<Tarjeta> listarTarjetas() {
@@ -259,7 +270,7 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
     }
 
     public void modificacion(Cuenta cuenta) {
-        Mensajeria.getInstancia().MostrarInformacion("Se ha modificado la cuenta " + cuenta);
+        Mensajeria.getInstancia().MostrarInformacion("Se ha modificado la cuenta " + cuenta.getCodigo());
         this.activarPanelListarCuenta(null);
         this.panelListarCuenta.RefrescarDatos();
         this.panelListarCuenta.repaint();
@@ -267,10 +278,14 @@ public class HandlerAplicacion implements IObservadorDeBussinessObject, IObserva
 
     @Override
     public void transferencia(Cuenta cuenta) {
+        Mensajeria.getInstancia().MostrarInformacion("Se ha realizado la tranferencia de la cuenta " + cuenta.getCodigo());
+        this.activarPanelListarCuentaUsuario(null, cuenta.getDni());
+        this.panelListarCuenta.RefrescarDatosUsuario(cuenta.getDni());
+        this.panelListarCuenta.repaint();
 
     }
 
-    public void transferenciaCuentas(Cuenta cuentaOrigen, Cuenta cuentaDestino, float monto) {
+    public void transferenciaCuentas(Cuenta cuentaOrigen, Cuenta cuentaDestino, float monto) throws ExcepcionCuenta {
         try {
             this.negocio.transferirMonto(cuentaOrigen, cuentaDestino, monto);
         }catch (ExcepcionCuenta ex){

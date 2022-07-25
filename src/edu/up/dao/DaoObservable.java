@@ -35,4 +35,10 @@ public class DaoObservable // Clase
             object.modificacionEnDao(cuenta);
         }
     }
+
+    public void notificarTransferencia(Cuenta cuenta) {
+        for (IObservadorDeDao object : this.observadores) {
+            object.transferenciaEnDao(cuenta);
+        }
+    }
 }

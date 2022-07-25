@@ -14,6 +14,6 @@ public interface TarjetaDAO {
     List<Tarjeta> list(int dni) throws ExcepcionTarjeta;
     
     void agregarObservador( IObservadorDeDaoTarjeta observador );
-    void notificarBaja( String codigoTarjeta ) throws ExcepcionTarjeta;
-    void notificarAlta( Tarjeta tarjeta ) throws ExcepcionTarjeta;
+   // void notificarBaja( String codigoTarjeta ) throws ExcepcionTarjeta;
+    //void notificarAlta( Tarjeta tarjeta ) throws ExcepcionTarjeta;
 }

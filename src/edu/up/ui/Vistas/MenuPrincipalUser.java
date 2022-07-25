@@ -27,7 +27,7 @@ public class MenuPrincipalUser extends JFrame
     }
 
     public void mostrar() throws DatoInvalidoException {
-        String s = JOptionPane.showInputDialog(
+        String s= JOptionPane.showInputDialog(
                 this,
                 "Ingrese DNI",
                 "Ingrese DNI",
@@ -42,10 +42,10 @@ public class MenuPrincipalUser extends JFrame
         } else {
             throw new DatoInvalidoException("El DNI es incorrecto");
         }
-
+        this.getContentPane().setVisible(false);
         this.setVisible(true);
-    }
 
+    }
     public void ocultar()
     {
         this.setVisible(false);
@@ -85,15 +85,11 @@ public class MenuPrincipalUser extends JFrame
         JMenuItem transferirEntreCuentas = new JMenuItem("Transferir");
         transferirEntreCuentas.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {handler.activarPanelTransferirCuenta( e, dni);
+            public void actionPerformed(ActionEvent e) {
+                handler.activarPanelTransferirCuenta( e, dni);
             }
-
-        }
-
-        );
-
+        });
         menuCuentas.add(transferirEntreCuentas);
-
 // -----------------------------------------------------------------------------------------------------------//
 // -------------------------------- USER: listar tarjetas ----------------------------------------------------//
 // -----------------------------------------------------------------------------------------------------------//

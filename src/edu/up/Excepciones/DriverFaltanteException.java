@@ -5,10 +5,6 @@
  */
 package edu.up.Excepciones;
 
-/**
- *
- * @author czamorano
- */
 public class DriverFaltanteException extends Exception
 {
     public DriverFaltanteException( String driver, Exception excepcion )

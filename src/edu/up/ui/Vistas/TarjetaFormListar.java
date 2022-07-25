@@ -64,7 +64,7 @@ public class TarjetaFormListar extends Form
                 int seleccionado = grilla.getSelectedRow();
                 if ( seleccionado >= 0 )
                 {
-                    handler.eliminarTarjeta( tarjetas.get( seleccionado ) );
+                    handler.eliminarTarjeta(tarjetas.get( seleccionado ) );
                 }
             }
         });

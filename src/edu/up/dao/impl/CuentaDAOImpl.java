@@ -1,4 +1,5 @@
 package edu.up.dao.impl;
+import edu.up.Entidades.Movimiento;
 import edu.up.dao.CuentaDAO;
 import edu.up.Entidades.Cuenta;
 import edu.up.Excepciones.ExcepcionConexionDB;
@@ -15,7 +16,7 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
     public void insert(Cuenta cuenta) throws ExcepcionCuenta
     {
         String codigo = java.util.UUID.randomUUID().toString().replaceAll("-", "");
-
+        String codigoMov= java.util.UUID.randomUUID().toString().replaceAll("-", "");
         String sql = "INSERT INTO cuentas (codigo, dni, nombre, tipocuenta, saldo, debito, credito) "
                 + "VALUES ("
                 + "'" + codigo + "', "
@@ -26,10 +27,18 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
                 + "'" + cuenta.getDebito() + "', "
                 + "'" + cuenta.getCredito() + "')";
 
- 
+        //ADEMAS DE CREARTE COMO CUENTA, CREATE EN LA TABLA DE MOVIMIENTOS
+        String sql2 = "INSERT into movimientos (codigomov, codigoCuenta, debito, credito) "
+                + "VALUES ("
+                + "'" + codigoMov + "', "
+                + "'" + codigo + "', "
+                + "'" + cuenta.getDebito() + "', "
+                + "'" + cuenta.getCredito() + "')";
+
         try
         {
             ConexionDB.getInstancia().executeSQL( sql );
+            ConexionDB.getInstancia().executeSQL( sql2 );
             this.notificarAlta( cuenta );
         }
         catch ( ExcepcionConexionDB ex )
@@ -45,8 +54,8 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
                 + "SET dni = " + cuenta.getDni()+ ", "
                 + "nombre = '" + cuenta.getNombre()+ "', "
                 + "tipocuenta = '" + cuenta.getTipoCuenta()+ "', "
-                + "saldo = " + cuenta.getSaldo()+ " "
-                + "debito = " + cuenta.getDebito()+ " "
+                + "saldo = " + cuenta.getSaldo()+ " ,"
+                + "debito = " + cuenta.getDebito()+ " ,"
                 + "credito = " + cuenta.getCredito()+ " "
                 + "WHERE codigo = '" + cuenta.getCodigo() +"'";
 
@@ -60,7 +69,28 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
             throw new ExcepcionCuenta( "Error al actualizar Cuenta", ex );
         }
     }
-    
+
+    @Override
+    public void transfer(Cuenta cuentaOrigen, Cuenta cuentaDestino) throws ExcepcionCuenta {
+        String sqlOrigen = "UPDATE cuentas "
+                + " SET saldo = " + cuentaOrigen.getSaldo()
+                + " WHERE codigo = '" + cuentaOrigen.getCodigo() +"'";
+        String sqlDestino = "UPDATE cuentas "
+                + " SET saldo = " + cuentaDestino.getSaldo()
+                + " WHERE codigo = '" + cuentaDestino.getCodigo() +"'";
+
+        try
+        {
+            ConexionDB.getInstancia().executeSQL( sqlOrigen );
+            ConexionDB.getInstancia().executeSQL( sqlDestino );
+            this.notificarTransferencia(cuentaOrigen);
+        }
+        catch ( ExcepcionConexionDB ex )
+        {
+            throw new ExcepcionCuenta( "Error al hacer transferencia", ex );
+        }
+    }
+
     @Override
     public void delete( Cuenta cuenta ) throws ExcepcionCuenta
     {
@@ -143,7 +173,7 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
         return results;
     }
 
-    public Cuenta get(String codigo) throws ExcepcionCuenta
+    public Cuenta devolverCuenta(String codigo) throws ExcepcionCuenta
     {
         List<Cuenta> results = new LinkedList<>();
 
@@ -180,5 +210,28 @@ public class CuentaDAOImpl extends DaoObservable implements CuentaDAO
         //obtener el primer elemento de results (si existe) y asignárselo a result para que el return de abajo lo devuelva
         result = results.get(0) ;
         return result;
+    }
+
+    // QUERY PARA SACAR EL INFORME DE LOS MOVIMIENTOS //
+    public void insertMovimiento(Movimiento movimiento) throws ExcepcionCuenta
+    {
+        String mocodigoMov = java.util.UUID.randomUUID().toString().replaceAll("-", "");
+        String sql = "INSERT into movimientos (codigomov, codigoCuenta, tipoMov, monto)"
+                + "VALUES ("
+                + "'" + mocodigoMov + "', "
+                + "'" + movimiento.getCodigoCuenta() + "', "
+                + "'" + movimiento.getTipoMovimiento() + "', "
+                + "'" + movimiento.getMonto() + "')";
+        movimiento.setCodigoMovimiento(mocodigoMov);
+
+        try
+        {
+            ConexionDB.getInstancia().executeSQL( sql );
+            //this.notificarAlta( cuenta ); armar notificarAltaMovimiento
+        }
+        catch ( ExcepcionConexionDB ex )
+        {
+            throw new ExcepcionCuenta( "Error al registrar el movimiento", ex );
+        }
     }
 }

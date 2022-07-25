@@ -32,6 +32,7 @@ public class CuentaFormListar extends Form
     {
         this.cuentas.clear();
         this.cuentas.addAll( this.handler.listarCuentasPorDni(dni) );
+        this.repaint();
     }
 
     public void actualizarListaPorCodigoEliminado( String codigo )
@@ -69,11 +70,13 @@ public class CuentaFormListar extends Form
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                handler.modificarCuenta( e, cuentas.get( grilla.getSelectedRow() ) );
+                String modification = (String)grilla.getModel().getValueAt(grilla.getSelectedRow(), 0);
+                handler.modificarCuenta(  handler.listarCuentasPorCodigo(modification));
             }
         });
         modificareliminar.add(botonmodificar);
         modificareliminar.add(Box.createHorizontalStrut(10));
+
 
         JButton botoneliminar = new JButton("Eliminar");
         botoneliminar.addActionListener(new ActionListener() 

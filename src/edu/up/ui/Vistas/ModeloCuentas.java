@@ -21,7 +21,7 @@ public class ModeloCuentas extends AbstractTableModel
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     // valores del listar
@@ -30,16 +30,24 @@ public class ModeloCuentas extends AbstractTableModel
         Cuenta cuenta = cuentas.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return cuenta.getDni();
+                return cuenta.getCodigo();
+
             case 1:
-                return cuenta.getNombre();
+                return cuenta.getDni();
+
             case 2:
-                return cuenta.getTipoCuenta();
+                return cuenta.getNombre();
+
             case 3:
-                return cuenta.getSaldo();
+                return cuenta.getTipoCuenta();
+
             case 4:
-                return cuenta.getDebito();
+                return cuenta.getSaldo();
+
             case 5:
+                return cuenta.getDebito();
+
+            case 6:
                 return cuenta.getCredito();
         }
         return null;
@@ -50,16 +58,18 @@ public class ModeloCuentas extends AbstractTableModel
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return "Dni";
+                return "Codigo";
             case 1:
-                return "Nombre";
+                return "Dni";
             case 2:
-                return "tipo";
+                return "Nombre";
             case 3:
-                return "saldo";
+                return "tipo";
             case 4:
-                return "debito";
+                return "saldo";
             case 5:
+                return "debito";
+            case 6:
                 return "credito";
         }
         return null;

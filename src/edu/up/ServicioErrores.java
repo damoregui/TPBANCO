@@ -25,6 +25,11 @@ public class ServicioErrores
         Mensajeria.getInstancia().mostrarError(ex.getMessage() );
         Logueos.loguearExcepcion( ex );
     }
+    public void informarError( String ex )
+    {
+        Mensajeria.getInstancia().mostrarError(ex );
+        Logueos.loguear( ex );
+    }
 
     public void informarError( Exception ex, String mensajeError )
     {
